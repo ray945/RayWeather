@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single" >
+        <item
+            android:id="@+id/item_add_city"
+            android:checked="false"
+            android:icon="@drawable/ic_pin_drop_white_18dp"
+            android:title="添加城市" />
+        <item
+            android:id="@+id/item_manage_city"
+            android:checked="false"
+            android:icon="@drawable/ic_sync_white_18dp"
+            android:title="管理城市" />
+        <item
+            android:id="@+id/item_setting"
+            android:checked="false"
+            android:icon="@drawable/ic_settings_white_18dp"
+            android:title="设置" />
+        <item
+            android:id="@+id/item_about"
+            android:checked="false"
+            android:icon="@drawable/ic_more_horiz_white_18dp"
+            android:title="关于" />
+    </group>
+</menu>

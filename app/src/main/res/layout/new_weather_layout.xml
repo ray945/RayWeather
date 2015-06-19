@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawer_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_menu_white_18dp"
+            app:titleTextAppearance="@style/textStyle"
+            app:title="Ray天气"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/primary_color">
+
+            </FrameLayout>
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/weather_info_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="300dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:elevation="1dp"
+                            android:orientation="vertical"
+                            android:background="@color/card_color">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/city_name"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:layout_marginTop="30dp"
+                                    android:layout_marginLeft="30dp"
+                                    android:paddingLeft="10dp"
+                                    android:textColor="@color/primary_color"
+                                    android:textSize="30sp"/>
+
+                                <TextView
+                                    android:id="@+id/weather_desp"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="right"
+                                    android:layout_marginTop="30dp"
+                                    android:layout_marginRight="30dp"
+                                    android:textColor="@color/card_text_color"
+                                    android:textSize="20sp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="2">
+
+                                <ImageView
+                                    android:id="@+id/img"
+                                    android:layout_width="110dp"
+                                    android:layout_height="110dp"
+                                    android:layout_marginTop="25dp"
+                                    android:layout_marginLeft="18dp"/>
+
+                                <TextView
+                                    android:id="@+id/temp_text"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="right"
+                                    android:layout_marginTop="50dp"
+                                    android:layout_marginRight="30dp"
+                                    android:textColor="@color/card_text_color"
+                                    android:textSize="60sp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:paddingTop="20dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/wind_text"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:layout_marginLeft="20dp"
+                                    android:gravity="center"
+                                    android:textColor="@color/card_text_color"
+                                    android:textSize="15sp"/>
+
+                                <TextView
+                                    android:id="@+id/humidity_text"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:textColor="@color/card_text_color"
+                                    android:textSize="15sp"/>
+
+                                <TextView
+                                    android:id="@+id/publish_text"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:layout_marginRight="20dp"
+                                    android:gravity="center"
+                                    android:textColor="@color/card_text_color"
+                                    android:textSize="15sp"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="160dp"
+                            android:layout_margin="15dp"
+                            android:elevation="1dp"
+                            android:background="@color/card_color"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="20dp"
+                                android:layout_marginLeft="14dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@color/primary_color"
+                                    android:textSize="20sp"
+                                    android:text="今天"/>
+
+                                <ImageView
+                                    android:id="@+id/today_image"
+                                    android:layout_width="50dp"
+                                    android:layout_height="70dp"
+                                    android:layout_gravity="center"
+                                    android:padding="5dp"/>
+
+                                <TextView
+                                    android:id="@+id/today_weather"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@color/sub_text_color"
+                                    android:textSize="14sp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="20dp"
+                                android:layout_marginLeft="8dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/pre_day1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@color/primary_color"
+                                    android:textSize="20sp"
+                                    android:text="周一"/>
+
+                                <ImageView
+                                    android:id="@+id/pre_image1"
+                                    android:layout_width="50dp"
+                                    android:layout_height="70dp"
+                                    android:layout_gravity="center"
+                                    android:padding="5dp"/>
+
+                                <TextView
+                                    android:id="@+id/pre_weather1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@color/sub_text_color"
+                                    android:textSize="14sp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="20dp"
+                                android:layout_marginLeft="10dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/pre_day2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@color/primary_color"
+                                    android:textSize="20sp"
+                                    android:text="周二"/>
+
+                                <ImageView
+                                    android:id="@+id/pre_image2"
+                                    android:layout_width="50dp"
+                                    android:layout_height="70dp"
+                                    android:layout_gravity="center"
+                                    android:padding="5dp"/>
+
+                                <TextView
+                                    android:id="@+id/pre_weather2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@color/sub_text_color"
+                                    android:textSize="14sp"/>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="20dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="14dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/pre_day3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@color/primary_color"
+                                    android:textSize="20sp"
+                                    android:text="周三"/>
+
+                                <ImageView
+                                    android:id="@+id/pre_image3"
+                                    android:layout_width="50dp"
+                                    android:layout_height="70dp"
+                                    android:layout_gravity="center"
+                                    android:padding="5dp"/>
+
+                                <TextView
+                                    android:id="@+id/pre_weather3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@color/sub_text_color"
+                                    android:textSize="14sp"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_marginBottom="15dp"
+                            android:background="@color/card_color"
+                            android:elevation="1dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginLeft="30dp"
+                                android:textColor="@color/primary_color"
+                                android:textSize="23sp"
+                                android:text="穿衣"/>
+
+                            <TextView
+                                android:id="@+id/cy_des_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="30dp"
+                                android:layout_marginRight="30dp"
+                                android:layout_marginBottom="10dp"
+                                android:textColor="@color/card_text_color"
+                                android:textSize="15sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="30dp"
+                                        android:textColor="@color/primary_color"
+                                        android:textSize="23sp"
+                                        android:text="运动"/>
+
+                                    <TextView
+                                        android:id="@+id/yd_hint_text"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="30dp"
+                                        android:layout_marginBottom="10dp"
+                                        android:textColor="@color/card_text_color"
+                                        android:textSize="15sp"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="30dp"
+                                        android:textColor="@color/primary_color"
+                                        android:textSize="23sp"
+                                        android:text="晾晒"/>
+
+                                    <TextView
+                                        android:id="@+id/ls_hint_text"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="30dp"
+                                        android:layout_marginBottom="10dp"
+                                        android:textColor="@color/card_text_color"
+                                        android:textSize="15sp"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="30dp"
+                                        android:textColor="@color/primary_color"
+                                        android:textSize="23sp"
+                                        android:text="感冒"/>
+
+                                    <TextView
+                                        android:id="@+id/gm_hint_text"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="30dp"
+                                        android:layout_marginBottom="10dp"
+                                        android:textColor="@color/card_text_color"
+                                        android:textSize="15sp"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="30dp"
+                                        android:textColor="@color/primary_color"
+                                        android:textSize="23sp"
+                                        android:text="逛街"/>
+
+                                    <TextView
+                                        android:id="@+id/gj_hint_text"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="30dp"
+                                        android:layout_marginBottom="10dp"
+                                        android:textColor="@color/card_text_color"
+                                        android:textSize="15sp"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="30dp"
+                                        android:textColor="@color/primary_color"
+                                        android:textSize="23sp"
+                                        android:text="雨伞"/>
+
+                                    <TextView
+                                        android:id="@+id/ys_hint_text"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="30dp"
+                                        android:layout_marginBottom="10dp"
+                                        android:textColor="@color/card_text_color"
+                                        android:textSize="15sp"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="30dp"
+                                        android:textColor="@color/primary_color"
+                                        android:textSize="23sp"
+                                        android:text="洗车"/>
+
+                                    <TextView
+                                        android:id="@+id/xc_hint_text"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="30dp"
+                                        android:layout_marginBottom="10dp"
+                                        android:textColor="@color/card_text_color"
+                                        android:textSize="15sp"/>
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </ScrollView>
+            </android.support.v4.widget.SwipeRefreshLayout>
+        </FrameLayout>
+    </LinearLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/header"
+        android:elevation="10dp"
+        app:menu="@menu/drawer"/>
+
+</android.support.v4.widget.DrawerLayout>

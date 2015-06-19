@@ -1,0 +1,17 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowContentOverlay">@null</item>
+        <!--ActionBar的颜色-->
+        <item name="colorPrimary">#03A9F4</item>
+        <!-- 随主题而改变的颜色（如CheckBox的颜色）-->
+        <item name="colorAccent">@color/accent_material_light</item>
+        <!--状态栏的颜色 （使用support包时似乎无效。）-->
+        <item name="colorPrimaryDark">#0288D1</item>
+        <!-- 窗口的背景颜色 -->
+        <item name="android:windowBackground">@color/background_material_light</item>
+        <item name="android:textColor">@color/primary_text_default_material_dark</item>
+
+    </style>
+
+</resources>
