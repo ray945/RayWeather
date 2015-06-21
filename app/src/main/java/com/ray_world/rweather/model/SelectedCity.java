@@ -6,7 +6,6 @@ package com.ray_world.rweather.model;
 public class SelectedCity {
 
     private String cityName;
-    private String cityCode;
     private String weather;
     private String temp;
 
@@ -14,9 +13,9 @@ public class SelectedCity {
         super();
     }
 
-    public SelectedCity(String city, String countyCode) {
+    public SelectedCity(String city, String temp) {
         this.cityName = city;
-        this.cityCode = countyCode;
+        this.temp = temp;
     }
 
     public String getCityName() {
@@ -25,14 +24,6 @@ public class SelectedCity {
 
     public void setCityName(String cityName) {
         this.cityName = cityName;
-    }
-
-    public String getCityCode() {
-        return cityCode;
-    }
-
-    public void setCityCode(String cityCode) {
-        this.cityCode = cityCode;
     }
 
     public String getWeather() {

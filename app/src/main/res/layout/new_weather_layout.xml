@@ -74,7 +74,8 @@
                                     android:layout_marginLeft="30dp"
                                     android:paddingLeft="10dp"
                                     android:textColor="@color/primary_color"
-                                    android:textSize="30sp"/>
+                                    android:textSize="30sp"
+                                    android:text="城市"/>
 
                                 <TextView
                                     android:id="@+id/weather_desp"
@@ -91,7 +92,8 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
-                                android:layout_weight="2">
+                                android:layout_weight="2"
+                                android:orientation="horizontal">
 
                                 <ImageView
                                     android:id="@+id/img"
@@ -100,16 +102,35 @@
                                     android:layout_marginTop="25dp"
                                     android:layout_marginLeft="18dp"/>
 
-                                <TextView
-                                    android:id="@+id/temp_text"
+                                <LinearLayout
                                     android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
+                                    android:layout_height="match_parent"
                                     android:layout_weight="1"
-                                    android:gravity="right"
-                                    android:layout_marginTop="50dp"
-                                    android:layout_marginRight="30dp"
-                                    android:textColor="@color/card_text_color"
-                                    android:textSize="60sp"/>
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/temp_text"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="right"
+                                        android:layout_marginTop="30dp"
+                                        android:layout_marginRight="30dp"
+                                        android:textColor="@color/card_text_color"
+                                        android:textSize="60sp"
+                                        android:text="--°"/>
+
+                                    <TextView
+                                        android:id="@+id/weather_text"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="right"
+                                        android:layout_marginTop="2dp"
+                                        android:layout_marginRight="40dp"
+                                        android:textColor="@color/card_text_color"
+                                        android:textSize="18sp"
+                                        android:text="--°C ~ --°C"/>
+
+                                </LinearLayout>
                             </LinearLayout>
 
                             <LinearLayout
@@ -168,39 +189,6 @@
                                 android:orientation="vertical">
 
                                 <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:textColor="@color/primary_color"
-                                    android:textSize="20sp"
-                                    android:text="今天"/>
-
-                                <ImageView
-                                    android:id="@+id/today_image"
-                                    android:layout_width="50dp"
-                                    android:layout_height="70dp"
-                                    android:layout_gravity="center"
-                                    android:padding="5dp"/>
-
-                                <TextView
-                                    android:id="@+id/today_weather"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center"
-                                    android:textColor="@color/sub_text_color"
-                                    android:textSize="14sp"/>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_weight="1"
-                                android:layout_height="match_parent"
-                                android:layout_marginTop="20dp"
-                                android:layout_marginBottom="20dp"
-                                android:layout_marginLeft="8dp"
-                                android:orientation="vertical">
-
-                                <TextView
                                     android:id="@+id/pre_day1"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -231,7 +219,7 @@
                                 android:layout_height="match_parent"
                                 android:layout_marginTop="20dp"
                                 android:layout_marginBottom="20dp"
-                                android:layout_marginLeft="10dp"
+                                android:layout_marginLeft="8dp"
                                 android:orientation="vertical">
 
                                 <TextView
@@ -266,7 +254,6 @@
                                 android:layout_marginTop="20dp"
                                 android:layout_marginBottom="20dp"
                                 android:layout_marginLeft="10dp"
-                                android:layout_marginRight="14dp"
                                 android:orientation="vertical">
 
                                 <TextView
@@ -293,6 +280,41 @@
                                     android:textColor="@color/sub_text_color"
                                     android:textSize="14sp"/>
                             </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="20dp"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="14dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/pre_day4"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@color/primary_color"
+                                    android:textSize="20sp"
+                                    android:text="周四"/>
+
+                                <ImageView
+                                    android:id="@+id/pre_image4"
+                                    android:layout_width="50dp"
+                                    android:layout_height="70dp"
+                                    android:layout_gravity="center"
+                                    android:padding="5dp"/>
+
+                                <TextView
+                                    android:id="@+id/pre_weather4"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:textColor="@color/sub_text_color"
+                                    android:textSize="14sp"/>
+                            </LinearLayout>
                         </LinearLayout>
 
                         <LinearLayout
@@ -311,7 +333,7 @@
                                 android:layout_marginTop="20dp"
                                 android:layout_marginLeft="30dp"
                                 android:textColor="@color/primary_color"
-                                android:textSize="23sp"
+                                android:textSize="20sp"
                                 android:text="穿衣"/>
 
                             <TextView
@@ -328,6 +350,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:layout_marginBottom="20dp"
                                 android:orientation="horizontal">
 
                                 <LinearLayout
@@ -337,35 +360,18 @@
                                     android:orientation="vertical">
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="30dp"
                                         android:textColor="@color/primary_color"
-                                        android:textSize="23sp"
-                                        android:text="运动"/>
+                                        android:textSize="20sp"
+                                        android:text="紫外线"/>
 
                                     <TextView
-                                        android:id="@+id/yd_hint_text"
-                                        android:layout_width="wrap_content"
+                                        android:id="@+id/uv_text"
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginLeft="30dp"
-                                        android:layout_marginBottom="10dp"
-                                        android:textColor="@color/card_text_color"
-                                        android:textSize="15sp"/>
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="30dp"
-                                        android:textColor="@color/primary_color"
-                                        android:textSize="23sp"
-                                        android:text="晾晒"/>
-
-                                    <TextView
-                                        android:id="@+id/ls_hint_text"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="30dp"
+                                        android:layout_marginLeft="33dp"
                                         android:layout_marginBottom="10dp"
                                         android:textColor="@color/card_text_color"
                                         android:textSize="15sp"/>
@@ -378,74 +384,40 @@
                                     android:orientation="vertical">
 
                                     <TextView
-                                        android:layout_width="wrap_content"
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="30dp"
                                         android:textColor="@color/primary_color"
-                                        android:textSize="23sp"
-                                        android:text="感冒"/>
-
-                                    <TextView
-                                        android:id="@+id/gm_hint_text"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="30dp"
-                                        android:layout_marginBottom="10dp"
-                                        android:textColor="@color/card_text_color"
-                                        android:textSize="15sp"/>
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="30dp"
-                                        android:textColor="@color/primary_color"
-                                        android:textSize="23sp"
-                                        android:text="逛街"/>
-
-                                    <TextView
-                                        android:id="@+id/gj_hint_text"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="30dp"
-                                        android:layout_marginBottom="10dp"
-                                        android:textColor="@color/card_text_color"
-                                        android:textSize="15sp"/>
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="30dp"
-                                        android:textColor="@color/primary_color"
-                                        android:textSize="23sp"
-                                        android:text="雨伞"/>
-
-                                    <TextView
-                                        android:id="@+id/ys_hint_text"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="30dp"
-                                        android:layout_marginBottom="10dp"
-                                        android:textColor="@color/card_text_color"
-                                        android:textSize="15sp"/>
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="30dp"
-                                        android:textColor="@color/primary_color"
-                                        android:textSize="23sp"
+                                        android:textSize="20sp"
                                         android:text="洗车"/>
 
                                     <TextView
-                                        android:id="@+id/xc_hint_text"
-                                        android:layout_width="wrap_content"
+                                        android:id="@+id/wash_text"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="30dp"
+                                        android:layout_marginBottom="10dp"
+                                        android:textColor="@color/card_text_color"
+                                        android:textSize="15sp"/>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="30dp"
+                                        android:textColor="@color/primary_color"
+                                        android:textSize="20sp"
+                                        android:text="运动"/>
+
+                                    <TextView
+                                        android:id="@+id/exercise_text"
+                                        android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="30dp"
                                         android:layout_marginBottom="10dp"

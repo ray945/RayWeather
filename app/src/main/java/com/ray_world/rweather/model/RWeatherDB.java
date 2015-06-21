@@ -126,8 +126,7 @@ public class RWeatherDB {
         if (selectedCity != null) {
             ContentValues values = new ContentValues();
             values.put("selected_city_name", selectedCity.getCityName());
-            values.put("selected_city_code", selectedCity.getCityCode());
-            values.put("selected_city_temp", selectedCity.getTemp());
+            values.put("selected_city_temp", selectedCity.getTemp() + "°C");
             db.insert("SelectedCity", null, values);
         }
     }
@@ -136,16 +135,16 @@ public class RWeatherDB {
     public void updateSelectedCity(SelectedCity selectedCity) {
         if (selectedCity != null) {
             ContentValues values = new ContentValues();
-            values.put("selected_city_temp", selectedCity.getTemp());
-            db.update("SelectedCity", values, "selected_city_code = ?",
-                    new String[]{selectedCity.getCityCode()});
+            values.put("selected_city_temp", selectedCity.getTemp() + "°C");
+            db.update("SelectedCity", values, "selected_city_name = ?",
+                    new String[]{selectedCity.getCityName()});
         }
     }
 
     //删除已选城市
-    public boolean deleteSelectedCity(String selectedCityCode) {
-        if (selectedCityCode != null) {
-            db.delete("SelectedCity", "selected_city_code = ?", new String[]{selectedCityCode});
+    public boolean deleteSelectedCity(String selectedCityName) {
+        if (selectedCityName != null) {
+            db.delete("SelectedCity", "selected_city_name = ?", new String[]{selectedCityName});
         }
         return true;
     }
@@ -158,7 +157,6 @@ public class RWeatherDB {
         if (cursor.moveToFirst()) {
             do {
                 SelectedCity selectedCity = new SelectedCity();
-                selectedCity.setCityCode(cursor.getString(cursor.getColumnIndex("selected_city_code")));
                 selectedCity.setCityName(cursor.getString(cursor.getColumnIndex("selected_city_name")));
                 selectedCity.setTemp(cursor.getString(cursor.getColumnIndex("selected_city_temp")));
                 list.add(selectedCity);
@@ -169,8 +167,8 @@ public class RWeatherDB {
 
     //查询已选城市是否存在
     public boolean checkSelectedCity(SelectedCity selectedCity) {
-        Cursor cursor = db.query("SelectedCity", null, "selected_city_code = ?",
-                new String[]{selectedCity.getCityCode()}, null, null, null);
+        Cursor cursor = db.query("SelectedCity", null, "selected_city_name = ?",
+                new String[]{selectedCity.getCityName()}, null, null, null);
         if (cursor.moveToFirst()) {
             return true;
         } else {

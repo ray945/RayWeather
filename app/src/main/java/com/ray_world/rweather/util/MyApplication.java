@@ -6,6 +6,8 @@ import java.util.List;
 import android.app.Activity;
 import android.app.Application;
 
+import com.thinkland.sdk.android.JuheSDKInitializer;
+
 /**
  * Created by ray on 15-6-13.
  */
