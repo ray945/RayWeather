@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -27,14 +28,12 @@ import java.util.Map;
 /**
  * Created by ray on 15-6-13.
  */
-public class ManageCityActivity extends ActionBarActivity {
+public class ManageCityActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
     private ListView manageCityist;
     private SimpleAdapter adapter;
 
     private RWeatherDB rWeatherDB;
-    private List<SelectedCity> selectedCityList;
 
     public static List<Map<String, String>> lists = new ArrayList<>();
 
@@ -58,9 +57,9 @@ public class ManageCityActivity extends ActionBarActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Map<String, String> item = (Map<String, String>) adapterView
                         .getItemAtPosition(position);
-                String weatherCode = item.get("cityCode");
+                String cityName = item.get("cityName");
                 Intent intent = new Intent(ManageCityActivity.this, WeatherActivity.class);
-                intent.putExtra("weather_code", weatherCode);
+                intent.putExtra("city_name", cityName);
                 startActivity(intent);
                 finish();
             }
@@ -79,7 +78,7 @@ public class ManageCityActivity extends ActionBarActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 lists.remove(item);
-                                rWeatherDB.deleteSelectedCity(item.get("cityCode"));
+                                rWeatherDB.deleteSelectedCity(item.get("cityName"));
                                 adapter.notifyDataSetChanged();
                             }
                         })
@@ -98,7 +97,7 @@ public class ManageCityActivity extends ActionBarActivity {
     }
 
     private void initToolbar() {
-        toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,14 +108,13 @@ public class ManageCityActivity extends ActionBarActivity {
     }
 
     public void querySelectedCity() {
-        selectedCityList = rWeatherDB.loadSelectedCity();
+        List<SelectedCity> selectedCityList = rWeatherDB.loadSelectedCity();
         if (selectedCityList.size() > 0) {
             lists.clear();
             for (SelectedCity selectedCity : selectedCityList) {
                 Map<String, String> list = new HashMap<>();
                 list.put("cityName", selectedCity.getCityName());
                 list.put("temp", selectedCity.getTemp());
-                list.put("cityCode", selectedCity.getCityCode());
                 lists.add(list);
             }
             adapter.notifyDataSetChanged();

@@ -11,11 +11,11 @@
             android:checked="false"
             android:icon="@drawable/ic_sync_white_18dp"
             android:title="管理城市" />
-        <item
-            android:id="@+id/item_setting"
-            android:checked="false"
-            android:icon="@drawable/ic_settings_white_18dp"
-            android:title="设置" />
+        <!--<item-->
+            <!--android:id="@+id/item_setting"-->
+            <!--android:checked="false"-->
+            <!--android:icon="@drawable/ic_settings_white_18dp"-->
+            <!--android:title="设置" />-->
         <item
             android:id="@+id/item_about"
             android:checked="false"

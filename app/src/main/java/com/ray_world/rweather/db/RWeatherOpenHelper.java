@@ -28,7 +28,6 @@ public class RWeatherOpenHelper extends SQLiteOpenHelper {
 
     public static final String CREATE_SELECTED_CITY = "create table SelectedCity ("
             + "id integer primary key autoincrement, "
-            + "selected_city_code text, "
             + "selected_city_name text, "
             + "selected_city_temp text)";
 

@@ -5,13 +5,16 @@ import android.content.SharedPreferences;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
+import android.text.format.Time;
 import android.util.Log;
 
+import com.ray_world.rweather.R;
 import com.ray_world.rweather.model.City;
 import com.ray_world.rweather.model.County;
 import com.ray_world.rweather.model.Province;
 import com.ray_world.rweather.model.RWeatherDB;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -83,133 +86,92 @@ public class Utility {
         try {
             Log.i("test", "handleWeatherResponse");
             JSONObject jsonObject = new JSONObject(response);
-            JSONObject weatherInfo = jsonObject.getJSONObject("data");
-            String cityName = weatherInfo.getString("district");
-            String weatherCode = weatherInfo.getString("areaid");
-            String temp = weatherInfo.getString("temp");
-            String weatherDesp = weatherInfo.getString("weather");
-            String windDirection = weatherInfo.getString("windDirection");
-            String windForce = weatherInfo.getString("windForce");
-            String humidity = weatherInfo.getString("humidity");
-            String img1 = weatherInfo.getString("img_1");
-            String refreshTime = weatherInfo.getString("refreshTime");
-            saveWeatherInfo(context, cityName, weatherCode, temp,  weatherDesp
-                    , windDirection, windForce, humidity, img1, refreshTime);
+            JSONObject result = jsonObject.getJSONObject("result");
+
+            JSONObject sk = result.getJSONObject("sk");
+            String temp = sk.getString("temp");
+            String windDirection = sk.getString("wind_direction");
+            String windStrength = sk.getString("wind_strength");
+            String humidity = sk.getString("humidity");
+            String time = sk.getString("time");
+
+            JSONObject today = result.getJSONObject("today");
+            String cityName = today.getString("city");
+            String temperature = today.getString("temperature");
+            String weatherDesp = today.getString("weather");
+            JSONObject weatherId = today.getJSONObject("weather_id");
+            String img1 = weatherId.getString("fa");
+            String dressing = today.getString("dressing_advice");
+            String uv = today.getString("uv_index");
+            String wash = today.getString("wash_index");
+            String exercise = today.getString("exercise_index");
+
+            JSONArray future = result.getJSONArray("future");
+            JSONObject pre1 = future.getJSONObject(1);
+            String preWeek1 = pre1.getString("week");
+            JSONObject preWeather1 = pre1.getJSONObject("weather_id");
+            String preImage1 = preWeather1.getString("fa");
+            String preTemp1 = pre1.getString("temperature");
+            JSONObject pre2 = future.getJSONObject(2);
+            String preWeek2 = pre2.getString("week");
+            JSONObject preWeather2 = pre2.getJSONObject("weather_id");
+            String preImage2 = preWeather2.getString("fa");
+            String preTemp2 = pre2.getString("temperature");
+            JSONObject pre3 = future.getJSONObject(3);
+            String preWeek3 = pre3.getString("week");
+            JSONObject preWeather3 = pre3.getJSONObject("weather_id");
+            String preImage3 = preWeather3.getString("fa");
+            String preTemp3 = pre3.getString("temperature");
+            JSONObject pre4 = future.getJSONObject(4);
+            String preWeek4 = pre4.getString("week");
+            JSONObject preWeather4 = pre4.getJSONObject("weather_id");
+            String preImage4 = preWeather4.getString("fa");
+            String preTemp4 = pre4.getString("temperature");
+
+            saveWeatherInfo(context, temp, windDirection, windStrength, humidity, time
+                    , cityName, temperature, weatherDesp, img1, dressing, uv, wash, exercise
+                    , preWeek1, preImage1, preTemp1, preWeek2, preImage2, preTemp2
+                    , preWeek3, preImage3, preTemp3, preWeek4, preImage4, preTemp4);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public static void handlePreWeatherResponse(Context context, String response) {
-        try {
-            Log.i("test", "handlePreWeatherResponse");
-            JSONObject jsonObject = new JSONObject(response);
-            JSONObject preWeatherInfo = jsonObject.getJSONObject("data");
-            String cityName = preWeatherInfo.getString("district");
-            String weatherCode = preWeatherInfo.getString("areaid");
-            String todayWeather = preWeatherInfo.getString("temp_1");
-            String preWeather1 = preWeatherInfo.getString("temp_2");
-            String preWeather2 = preWeatherInfo.getString("temp_3");
-            String preWeather3 = preWeatherInfo.getString("temp_4");
-            String todayImage = preWeatherInfo.getString("img_1");
-            String preImage1 = preWeatherInfo.getString("img_3");
-            String preImage2 = preWeatherInfo.getString("img_5");
-            String preImage3 = preWeatherInfo.getString("img_7");
-            String suggestion = preWeatherInfo.getString("index_d");
-            savePreWeatherInfo(context, cityName, weatherCode, todayWeather, preWeather1
-                    , preWeather2, preWeather3, todayImage, preImage1, preImage2
-                    , preImage3, suggestion);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
 
-    public static void handleSuggestionResponse(Context context, String response) {
-        try {
-            Log.i("test", "handleSuggestionResponse");
-            JSONObject jsonObject = new JSONObject(response);
-            JSONObject suggestionInfo = jsonObject.getJSONObject("data");
-            String cyName = suggestionInfo.getString("ct_name");
-            String cyDes = suggestionInfo.getString("ct_des");
-            String gjName = suggestionInfo.getString("gj_name");
-            String gjHint = suggestionInfo.getString("gj_hint");
-            String gmName = suggestionInfo.getString("gm_name");
-            String gmHint = suggestionInfo.getString("gm_hint");
-            String lsName = suggestionInfo.getString("ls_name");
-            String lsHint = suggestionInfo.getString("ls_hint");
-            String xcName = suggestionInfo.getString("xc_name");
-            String xcHint = suggestionInfo.getString("xc_hint");
-            String ydName = suggestionInfo.getString("yd_name");
-            String ydHint = suggestionInfo.getString("yd_hint");
-            String ysName = suggestionInfo.getString("ys_name");
-            String ysHint = suggestionInfo.getString("ys_hint");
-            saveSuggestionInfo(context, cyName, cyDes, gjName, gjHint, gmName, gmHint, lsName
-                    , lsHint, xcName, xcHint, ydName, ydHint, ysName, ysHint);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static void saveSuggestionInfo(Context context, String cyName, String cyDes
-            , String gjName, String gjHint, String gmName, String gmHint, String lsName
-            , String lsHint, String xcName, String xcHint, String ydName, String ydHint
-            , String ysName, String ysHint) {
-        SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(context).edit();
-        editor.putString("cyName", cyName);
-        editor.putString("cyDes", cyDes);
-        editor.putString("gjName", gjName);
-        editor.putString("gjHint", gjHint);
-        editor.putString("gmName", gmName);
-        editor.putString("gmHint", gmHint);
-        editor.putString("lsName", lsName);
-        editor.putString("lsHint", lsHint);
-        editor.putString("xcName", xcName);
-        editor.putString("xcHint", xcHint);
-        editor.putString("ydName", ydName);
-        editor.putString("ydHint", ydHint);
-        editor.putString("ysName", ysName);
-        editor.putString("ysHint", ysHint);
-        editor.commit();
-
-    }
-
-    private static void savePreWeatherInfo(Context context, String cityName, String weatherCode
-            , String todayWeather, String preWeather1, String preWeather2, String preWeather3
-            , String todayImage, String preImage1, String preImage2, String preImage3
-            , String suggestion) {
+    private static void saveWeatherInfo(Context context, String temp, String windDirection
+            , String windStrength, String humidity, String time, String cityName
+            , String temperature, String weatherDesp, String img1, String dressing, String uv
+            , String wash, String exercise, String preWeek1, String preImage1
+            , String preTemp1, String preWeek2, String preImage2, String preTemp2, String preWeek3
+            , String preImage3, String preTemp3, String preWeek4, String preImage4, String preTemp4) {
         SharedPreferences.Editor editor = PreferenceManager
                 .getDefaultSharedPreferences(context).edit();
         editor.putBoolean("city_selected", true);
-        editor.putString("cityName", cityName);
-        editor.putString("weatherCode", weatherCode);
-        editor.putString("todayWeather", todayWeather);
-        editor.putString("preWeather1", preWeather1);
-        editor.putString("preWeather2", preWeather2);
-        editor.putString("preWeather3", preWeather3);
-        editor.putString("todayImage", todayImage);
-        editor.putString("preImage1", preImage1);
-        editor.putString("preImage2", preImage2);
-        editor.putString("preImage3", preImage3);
-        editor.putString("suggestion", suggestion);
-        editor.commit();
-    }
-
-    private static void saveWeatherInfo(Context context, String cityName, String weatherCode
-            , String temp,  String weatherDesp, String windDirection
-            , String windForce, String humidity, String img1, String refreshTime) {
-        SharedPreferences.Editor editor = PreferenceManager
-                .getDefaultSharedPreferences(context).edit();
-        editor.putBoolean("city_selected", true);
-        editor.putString("cityName", cityName);
-        editor.putString("weatherCode", weatherCode);
         editor.putString("temp", temp);
-        editor.putString("weatherDesp", weatherDesp);
         editor.putString("windDirection", windDirection);
-        editor.putString("windForce", windForce);
+        editor.putString("windStrength", windStrength);
         editor.putString("humidity", humidity);
+        editor.putString("refreshTime", time);
+        editor.putString("cityName", cityName);
+        editor.putString("temperature", temperature);
+        editor.putString("weatherDesp", weatherDesp);
         editor.putString("img1", img1);
-        editor.putString("refreshTime", refreshTime);
+        editor.putString("dressing", dressing);
+        editor.putString("uv", uv);
+        editor.putString("wash", wash);
+        editor.putString("exercise", exercise);
+        editor.putString("preWeek1", preWeek1);
+        editor.putString("preImage1", preImage1);
+        editor.putString("preTemp1", preTemp1);
+        editor.putString("preWeek2", preWeek2);
+        editor.putString("preImage2", preImage2);
+        editor.putString("preTemp2", preTemp2);
+        editor.putString("preWeek3", preWeek3);
+        editor.putString("preImage3", preImage3);
+        editor.putString("preTemp3", preTemp3);
+        editor.putString("preWeek4", preWeek4);
+        editor.putString("preImage4", preImage4);
+        editor.putString("preTemp4", preTemp4);
         editor.commit();
     }
 }

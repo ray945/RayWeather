@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,7 +31,7 @@ import java.util.List;
 /**
  * Created by ray on 15-5-3.
  */
-public class ChooseAreaActivity extends Activity {
+public class ChooseAreaActivity extends AppCompatActivity {
 
     public static final int LEVEL_PROVINCE = 0;
     public static final int LEVEL_CITY = 1;
@@ -85,9 +86,9 @@ public class ChooseAreaActivity extends Activity {
                     selectedCity = cityList.get(position);
                     queryCounties();
                 } else if (currentLevel == LEVEL_COUNTY) {
-                    String countyCode = countyList.get(position).getCountyCode();
+                    String cityName = countyList.get(position).getCountyName();
                     Intent intent = new Intent(ChooseAreaActivity.this, WeatherActivity.class);
-                    intent.putExtra("county_code", countyCode);
+                    intent.putExtra("city_name", cityName);
                     startActivity(intent);
                     finish();
                 }
