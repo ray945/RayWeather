@@ -83,7 +83,7 @@ public class WeatherActivity extends AppCompatActivity {
         weatherDespText = (TextView) findViewById(R.id.weather_desp);
         tempText = (TextView) findViewById(R.id.temp_text);
         weatherText = (TextView) findViewById(R.id.weather_text);
-        cityName = (TextView) findViewById(R.id.city_name);
+        cityName = (TextView) findViewById(R.id.city_name_text);
         image = (ImageView) findViewById(R.id.img);
         preDayText1 = (TextView) findViewById(R.id.pre_day1);
         preDayText2 = (TextView) findViewById(R.id.pre_day2);
@@ -132,6 +132,7 @@ public class WeatherActivity extends AppCompatActivity {
                     finish();
                 } else if (menuItem.getItemId() == R.id.item_manage_city) {
                     Intent intent = new Intent(WeatherActivity.this, ManageCityActivity.class);
+                    intent.putExtra("currentCity", cityName.getText().toString());
                     startActivity(intent);
                 } else if (menuItem.getItemId() == R.id.item_about) {
                     Intent intent = new Intent(WeatherActivity.this, AboutActivity.class);
@@ -196,7 +197,7 @@ public class WeatherActivity extends AppCompatActivity {
                     String cityName = prefs.getString("cityName", "");
                     String cityTemp = prefs.getString("temp", "");
                     SelectedCity selectedCity = new SelectedCity(cityName, cityTemp);
-                    if (!rWeatherDB.checkSelectedCity(selectedCity)) {
+                    if (!rWeatherDB.checkSelectedCity(selectedCity.getCityName())) {
                         rWeatherDB.saveSelectedCity(selectedCity);
                     } else {
                         rWeatherDB.updateSelectedCity(selectedCity);

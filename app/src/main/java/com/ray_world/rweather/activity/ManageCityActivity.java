@@ -2,18 +2,18 @@ package com.ray_world.rweather.activity;
 
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.ray_world.rweather.R;
 import com.ray_world.rweather.model.RWeatherDB;
@@ -37,11 +37,17 @@ public class ManageCityActivity extends AppCompatActivity {
 
     public static List<Map<String, String>> lists = new ArrayList<>();
 
+    private String currentCity;
+    private int flag = 0;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manage_city);
         MyApplication.getInstance().addActivity(this);
+
+        Intent intent = getIntent();
+        currentCity = intent.getStringExtra("currentCity");
 
         initToolbar();
         manageCityist = (ListView) findViewById(R.id.manage_city_list);
@@ -66,7 +72,7 @@ public class ManageCityActivity extends AppCompatActivity {
         });
         manageCityist.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view
+            public boolean onItemLongClick(final AdapterView<?> adapterView, View view
                     , int position, long l) {
                 Log.i("test", "长按");
                 final Map<String, String> item = (Map<String, String>) adapterView
@@ -80,6 +86,15 @@ public class ManageCityActivity extends AppCompatActivity {
                                 lists.remove(item);
                                 rWeatherDB.deleteSelectedCity(item.get("cityName"));
                                 adapter.notifyDataSetChanged();
+
+                                if (!rWeatherDB.checkSelectedCity(currentCity)) {
+                                    flag = 1;
+                                    Map<String, String> item = (Map<String, String>) adapterView
+                                            .getItemAtPosition(0);
+                                    currentCity = item.get("cityName");
+                                } else {
+                                    flag = 0;
+                                }
                             }
                         })
                         .setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -119,6 +134,18 @@ public class ManageCityActivity extends AppCompatActivity {
             }
             adapter.notifyDataSetChanged();
             manageCityist.setSelection(0);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (flag == 1) {
+            flag = 0;
+            Intent intent = new Intent(ManageCityActivity.this, WeatherActivity.class);
+            intent.putExtra("city_name", currentCity);
+            startActivity(intent);
+        } else {
+            super.onBackPressed();
         }
     }
 }

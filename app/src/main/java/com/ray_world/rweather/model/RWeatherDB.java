@@ -166,9 +166,9 @@ public class RWeatherDB {
     }
 
     //查询已选城市是否存在
-    public boolean checkSelectedCity(SelectedCity selectedCity) {
+    public boolean checkSelectedCity(String cityName) {
         Cursor cursor = db.query("SelectedCity", null, "selected_city_name = ?",
-                new String[]{selectedCity.getCityName()}, null, null, null);
+                new String[]{cityName}, null, null, null);
         if (cursor.moveToFirst()) {
             return true;
         } else {
