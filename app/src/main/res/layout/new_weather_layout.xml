@@ -327,10 +327,83 @@
                             android:elevation="1dp"
                             android:orientation="vertical">
 
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="30dp"
+                                    android:textColor="@color/primary_color"
+                                    android:textSize="20sp"
+                                    android:text="空气质量"/>
+
+                                <TextView
+                                    android:id="@+id/quality_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="20dp"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:background="@color/liang"
+                                    android:textColor="@color/card_color"
+                                    android:textSize="13sp"
+                                    android:text="良"/>
+                            </LinearLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp">
+
+                                <TextView
+                                    android:id="@+id/aqi"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="30dp"
+                                    android:layout_alignParentLeft="true"
+                                    android:textColor="@color/card_text_color"
+                                    android:textSize="15sp"
+                                    android:text="AQI"/>
+
+                                <TextView
+                                    android:id="@+id/aqi_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_toRightOf="@id/aqi"
+                                    android:layout_marginLeft="20dp"
+                                    android:textColor="@color/card_text_color"
+                                    android:textSize="15sp"
+                                    android:text="61"/>
+
+                                <TextView
+                                    android:id="@+id/pm"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_toRightOf="@id/aqi_text"
+                                    android:layout_marginLeft="50dp"
+                                    android:textColor="@color/card_text_color"
+                                    android:textSize="15sp"
+                                    android:text="PM2.5"/>
+
+                                <TextView
+                                    android:id="@+id/pm_text"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_toRightOf="@id/pm"
+                                    android:layout_marginLeft="20dp"
+                                    android:textColor="@color/card_text_color"
+                                    android:textSize="15sp"
+                                    android:text="30"/>
+                            </RelativeLayout>
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="20dp"
+                                android:layout_marginTop="10dp"
                                 android:layout_marginLeft="30dp"
                                 android:textColor="@color/primary_color"
                                 android:textSize="20sp"
@@ -340,6 +413,7 @@
                                 android:id="@+id/cy_des_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
                                 android:layout_marginLeft="30dp"
                                 android:layout_marginRight="30dp"
                                 android:layout_marginBottom="10dp"
@@ -371,6 +445,7 @@
                                         android:id="@+id/uv_text"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:layout_marginTop="3dp"
                                         android:layout_marginLeft="33dp"
                                         android:layout_marginBottom="10dp"
                                         android:textColor="@color/card_text_color"
@@ -395,6 +470,7 @@
                                         android:id="@+id/wash_text"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:layout_marginTop="3dp"
                                         android:layout_marginLeft="30dp"
                                         android:layout_marginBottom="10dp"
                                         android:textColor="@color/card_text_color"
@@ -419,6 +495,7 @@
                                         android:id="@+id/exercise_text"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
+                                        android:layout_marginTop="5dp"
                                         android:layout_marginLeft="30dp"
                                         android:layout_marginBottom="10dp"
                                         android:textColor="@color/card_text_color"

@@ -81,6 +81,30 @@ public class Utility {
         return false;
     }
 
+    public static void handlePMResponse(Context context, String response) {
+        Log.i("test", "handlePMResponse");
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray results = jsonObject.getJSONArray("result");
+            JSONObject result = results.getJSONObject(0);
+            String aqi = result.getString("AQI");
+            String pm = result.getString("PM2.5");
+            String quality = result.getString("quality");
+            savePMResponse(context, aqi, pm, quality);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void savePMResponse(Context context, String aqi, String pm, String quality) {
+        SharedPreferences.Editor editor = PreferenceManager
+                .getDefaultSharedPreferences(context).edit();
+        editor.putString("aqi", aqi);
+        editor.putString("pm", pm);
+        editor.putString("quality", quality);
+        editor.commit();
+    }
+
     public static void handleWeatherResponse(Context context, String response) {
 
         try {

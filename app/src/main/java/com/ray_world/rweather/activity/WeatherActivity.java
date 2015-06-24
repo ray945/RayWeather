@@ -62,6 +62,9 @@ public class WeatherActivity extends AppCompatActivity {
     private TextView uvText;
     private TextView washText;
     private TextView exerciseText;
+    private TextView quelityText;
+    private TextView aqiText;
+    private TextView pmText;
     private ImageView image;
     private NavigationView mNavigationView;
     private FrameLayout header;
@@ -72,6 +75,8 @@ public class WeatherActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
 
     private RWeatherDB rWeatherDB;
+    boolean isWeatherHandled = false;
+    boolean isPMHandled = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -103,6 +108,9 @@ public class WeatherActivity extends AppCompatActivity {
         uvText = (TextView) findViewById(R.id.uv_text);
         washText = (TextView) findViewById(R.id.wash_text);
         exerciseText = (TextView) findViewById(R.id.exercise_text);
+        quelityText = (TextView) findViewById(R.id.quality_text);
+        aqiText = (TextView) findViewById(R.id.aqi_text);
+        pmText = (TextView) findViewById(R.id.pm_text);
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
         header = (FrameLayout) findViewById(R.id.header);
 
@@ -192,6 +200,7 @@ public class WeatherActivity extends AppCompatActivity {
             public void onSuccess(int i, String response) {
                 if (!TextUtils.isEmpty(response)) {
                     Utility.handleWeatherResponse(WeatherActivity.this, response);
+                    isWeatherHandled = true;
                     SharedPreferences prefs = PreferenceManager
                             .getDefaultSharedPreferences(WeatherActivity.this);
                     String cityName = prefs.getString("cityName", "");
@@ -205,10 +214,47 @@ public class WeatherActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            showWeather();
+                            if (isPMHandled) {
+                                showWeather();
+                            }
                         }
                     });
                 }
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+
+            @Override
+            public void onFailure(int i, String s, Throwable throwable) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        toolbar.setTitle("同步失败");
+                    }
+                });
+                Log.e("error", throwable.getMessage());
+            }
+        });
+
+        Parameters parameters2 = new Parameters();
+        parameters2.add("city", cityName);
+        JuheData.executeWithAPI(this, 33, "http://web.juhe.cn:8080/environment/air/pm"
+                , JuheData.GET, parameters2, new DataCallBack() {
+            @Override
+            public void onSuccess(int i, String response) {
+                Utility.handlePMResponse(WeatherActivity.this, response);
+                isPMHandled = true;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (isWeatherHandled) {
+                            showWeather();
+                        }
+                    }
+                });
             }
 
             @Override
@@ -264,6 +310,24 @@ public class WeatherActivity extends AppCompatActivity {
         setWeek(preDayText2, "preWeek2");
         setWeek(preDayText3, "preWeek3");
         setWeek(preDayText4, "preWeek4");
+
+        aqiText.setText(prefs.getString("aqi", ""));
+        pmText.setText(prefs.getString("pm", ""));
+        quelityText.setText(prefs.getString("quality", ""));
+        int aqi = Integer.valueOf(prefs.getString("aqi", "0"));
+        if (aqi <= 50) {
+            quelityText.setBackgroundResource(R.color.you);
+        } else if (aqi > 50 && aqi <=100) {
+            quelityText.setBackgroundResource(R.color.liang);
+        } else if (aqi > 100 && aqi <=150) {
+            quelityText.setBackgroundResource(R.color.qingdu);
+        } else if (aqi > 150 && aqi <=200) {
+            quelityText.setBackgroundResource(R.color.zhongdu);
+        } else if (aqi > 200 && aqi <=300) {
+            quelityText.setBackgroundResource(R.color.yanzhong);
+        } else {
+            quelityText.setBackgroundResource(R.color.heavy);
+        }
     }
 
     public void setWeek(TextView tv, String str) {
