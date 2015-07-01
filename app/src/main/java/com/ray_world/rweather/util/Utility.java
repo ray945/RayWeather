@@ -105,6 +105,169 @@ public class Utility {
         editor.commit();
     }
 
+    public static void handleTimeWeatherResponse(Context context, String response) {
+
+        Log.i("test", "handleTimeWeatherResponse");
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            JSONArray results = jsonObject.getJSONArray("result");
+
+            JSONObject result1 = results.getJSONObject(0);
+            String weatherId1 = result1.getString("weatherid");
+            String weather1 = result1.getString("weather");
+            String tempMin1 = result1.getString("temp1");
+            String tempMax1 = result1.getString("temp2");
+            String sh1 = result1.getString("sh");
+            String eh1 = result1.getString("eh");
+
+            JSONObject result2 = results.getJSONObject(1);
+            String weatherId2 = result2.getString("weatherid");
+            String weather2 = result2.getString("weather");
+            String tempMin2 = result2.getString("temp1");
+            String tempMax2 = result2.getString("temp2");
+            String sh2 = result2.getString("sh");
+            String eh2 = result2.getString("eh");
+
+            JSONObject result3 = results.getJSONObject(2);
+            String weatherId3 = result3.getString("weatherid");
+            String weather3 = result3.getString("weather");
+            String tempMin3 = result3.getString("temp1");
+            String tempMax3 = result3.getString("temp2");
+            String sh3 = result3.getString("sh");
+            String eh3 = result3.getString("eh");
+
+            JSONObject result4 = results.getJSONObject(3);
+            String weatherId4 = result4.getString("weatherid");
+            String weather4 = result4.getString("weather");
+            String tempMin4 = result4.getString("temp1");
+            String tempMax4 = result4.getString("temp2");
+            String sh4 = result4.getString("sh");
+            String eh4 = result4.getString("eh");
+
+            JSONObject result5 = results.getJSONObject(4);
+            String weatherId5 = result5.getString("weatherid");
+            String weather5 = result5.getString("weather");
+            String tempMin5 = result5.getString("temp1");
+            String tempMax5 = result5.getString("temp2");
+            String sh5 = result5.getString("sh");
+            String eh5 = result5.getString("eh");
+
+            JSONObject result6 = results.getJSONObject(5);
+            String weatherId6 = result6.getString("weatherid");
+            String weather6 = result6.getString("weather");
+            String tempMin6 = result6.getString("temp1");
+            String tempMax6 = result6.getString("temp2");
+            String sh6 = result6.getString("sh");
+            String eh6 = result6.getString("eh");
+
+            JSONObject result7 = results.getJSONObject(6);
+            String weatherId7 = result7.getString("weatherid");
+            String weather7 = result7.getString("weather");
+            String tempMin7 = result7.getString("temp1");
+            String tempMax7 = result7.getString("temp2");
+            String sh7 = result7.getString("sh");
+            String eh7 = result7.getString("eh");
+
+            JSONObject result8 = results.getJSONObject(7);
+            String weatherId8 = result8.getString("weatherid");
+            String weather8 = result8.getString("weather");
+            String tempMin8 = result8.getString("temp1");
+            String tempMax8 = result8.getString("temp2");
+            String sh8 = result8.getString("sh");
+            String eh8 = result8.getString("eh");
+
+            saveTimeWeatherResponse(context, weatherId1, weather1,tempMax1, tempMin1, sh1, eh1
+                    , weatherId2, weather2,tempMax2, tempMin2, sh2, eh2
+                    , weatherId3, weather3,tempMax3, tempMin3, sh3, eh3
+                    , weatherId4, weather4,tempMax4, tempMin4, sh4, eh4
+                    , weatherId5, weather5,tempMax5, tempMin5, sh5, eh5
+                    , weatherId6, weather6,tempMax6, tempMin6, sh6, eh6
+                    , weatherId7, weather7,tempMax7, tempMin7, sh7, eh7
+                    , weatherId8, weather8,tempMax8, tempMin8, sh8, eh8);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void saveTimeWeatherResponse(Context context
+            , String weatherId1, String weather1, String tempMax1, String tempMin1, String sh1
+            , String eh1
+            , String weatherId2, String weather2, String tempMax2, String tempMin2, String sh2
+            , String eh2
+            , String weatherId3, String weather3, String tempMax3, String tempMin3, String sh3
+            , String eh3
+            , String weatherId4, String weather4, String tempMax4, String tempMin4, String sh4
+            , String eh4
+            , String weatherId5, String weather5, String tempMax5, String tempMin5, String sh5
+            , String eh5
+            , String weatherId6, String weather6, String tempMax6, String tempMin6, String sh6
+            , String eh6
+            , String weatherId7, String weather7, String tempMax7, String tempMin7, String sh7
+            , String eh7
+            , String weatherId8, String weather8, String tempMax8, String tempMin8, String sh8
+            , String eh8) {
+
+        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context)
+                .edit();
+        editor.putString("weatherId1", weatherId1);
+        editor.putString("weather1", weather1);
+        editor.putString("tempMax1", tempMax1);
+        editor.putString("tempMin1", tempMin1);
+        editor.putString("sh1", sh1);
+        editor.putString("eh1", eh1);
+
+        editor.putString("weatherId2", weatherId2);
+        editor.putString("weather2", weather2);
+        editor.putString("tempMax2", tempMax2);
+        editor.putString("tempMin2", tempMin2);
+        editor.putString("sh2", sh2);
+        editor.putString("eh2", eh2);
+
+        editor.putString("weatherId3", weatherId3);
+        editor.putString("weather3", weather3);
+        editor.putString("tempMax3", tempMax3);
+        editor.putString("tempMin3", tempMin3);
+        editor.putString("sh3", sh3);
+        editor.putString("eh3", eh3);
+
+        editor.putString("weatherId4", weatherId4);
+        editor.putString("weather4", weather4);
+        editor.putString("tempMax4", tempMax4);
+        editor.putString("tempMin4", tempMin4);
+        editor.putString("sh4", sh4);
+        editor.putString("eh4", eh4);
+
+        editor.putString("weatherId5", weatherId5);
+        editor.putString("weather5", weather5);
+        editor.putString("tempMax5", tempMax5);
+        editor.putString("tempMin5", tempMin5);
+        editor.putString("sh5", sh5);
+        editor.putString("eh5", eh5);
+
+        editor.putString("weatherId6", weatherId6);
+        editor.putString("weather6", weather6);
+        editor.putString("tempMax6", tempMax6);
+        editor.putString("tempMin6", tempMin6);
+        editor.putString("sh6", sh6);
+        editor.putString("eh6", eh6);
+
+        editor.putString("weatherId7", weatherId7);
+        editor.putString("weather7", weather7);
+        editor.putString("tempMax7", tempMax7);
+        editor.putString("tempMin7", tempMin7);
+        editor.putString("sh7", sh7);
+        editor.putString("eh7", eh7);
+
+        editor.putString("weatherId8", weatherId8);
+        editor.putString("weather8", weather8);
+        editor.putString("tempMax8", tempMax8);
+        editor.putString("tempMin8", tempMin8);
+        editor.putString("sh8", sh8);
+        editor.putString("eh8", eh8);
+
+        editor.commit();
+    }
+
     public static void handleWeatherResponse(Context context, String response) {
 
         try {

@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/card_color"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="18sp"
+        android:textColor="@color/primary_color"
+        android:text="城市3小时天气预报"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/time_area"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:layout_marginLeft="25dp"
+            android:textColor="@color/card_text_color"
+            android:textSize="15sp"
+            android:text="08-11时"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/time_image"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/a01"/>
+
+            <TextView
+                android:id="@+id/time_weather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/card_text_color"
+                android:textSize="15sp"
+                android:text="多云"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/time_temp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:layout_marginRight="25dp"
+            android:textColor="@color/card_text_color"
+            android:textSize="15sp"
+            android:text="25°C/30°C"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/time_area2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:layout_marginLeft="25dp"
+            android:textColor="@color/card_text_color"
+            android:textSize="15sp"
+            android:text="08-11时"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/time_image2"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/a01"/>
+
+            <TextView
+                android:id="@+id/time_weather2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/card_text_color"
+                android:textSize="15sp"
+                android:text="多云"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/time_temp2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:layout_marginRight="25dp"
+            android:textColor="@color/card_text_color"
+            android:textSize="15sp"
+            android:text="25°C/30°C"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/time_area3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:layout_marginLeft="25dp"
+            android:textColor="@color/card_text_color"
+            android:textSize="15sp"
+            android:text="08-11时"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/time_image3"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/a01"/>
+
+            <TextView
+                android:id="@+id/time_weather3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/card_text_color"
+                android:textSize="15sp"
+                android:text="多云"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/time_temp3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:layout_marginRight="25dp"
+            android:textColor="@color/card_text_color"
+            android:textSize="15sp"
+            android:text="25°C/30°C"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/time_area4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:layout_marginLeft="25dp"
+            android:textColor="@color/card_text_color"
+            android:textSize="15sp"
+            android:text="08-11时"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/time_image4"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/a01"/>
+
+            <TextView
+                android:id="@+id/time_weather4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/card_text_color"
+                android:textSize="15sp"
+                android:text="多云"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/time_temp4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:layout_marginRight="25dp"
+            android:textColor="@color/card_text_color"
+            android:textSize="15sp"
+            android:text="25°C/30°C"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/time_area5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:layout_marginLeft="25dp"
+            android:textColor="@color/card_text_color"
+            android:textSize="15sp"
+            android:text="08-11时"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/time_image5"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/a01"/>
+
+            <TextView
+                android:id="@+id/time_weather5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/card_text_color"
+                android:textSize="15sp"
+                android:text="多云"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/time_temp5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:layout_marginRight="25dp"
+            android:textColor="@color/card_text_color"
+            android:textSize="15sp"
+            android:text="25°C/30°C"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/time_area6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:layout_marginLeft="25dp"
+            android:textColor="@color/card_text_color"
+            android:textSize="15sp"
+            android:text="08-11时"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/time_image6"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/a01"/>
+
+            <TextView
+                android:id="@+id/time_weather6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/card_text_color"
+                android:textSize="15sp"
+                android:text="多云"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/time_temp6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:layout_marginRight="25dp"
+            android:textColor="@color/card_text_color"
+            android:textSize="15sp"
+            android:text="25°C/30°C"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/time_area7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:layout_marginLeft="25dp"
+            android:textColor="@color/card_text_color"
+            android:textSize="15sp"
+            android:text="08-11时"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/time_image7"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/a01"/>
+
+            <TextView
+                android:id="@+id/time_weather7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/card_text_color"
+                android:textSize="15sp"
+                android:text="多云"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/time_temp7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:layout_marginRight="25dp"
+            android:textColor="@color/card_text_color"
+            android:textSize="15sp"
+            android:text="25°C/30°C"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:id="@+id/time_area8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:layout_marginLeft="25dp"
+            android:textColor="@color/card_text_color"
+            android:textSize="15sp"
+            android:text="08-11时"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/time_image8"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@drawable/a01"/>
+
+            <TextView
+                android:id="@+id/time_weather8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/card_text_color"
+                android:textSize="15sp"
+                android:text="多云"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/time_temp8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:layout_marginRight="25dp"
+            android:textColor="@color/card_text_color"
+            android:textSize="15sp"
+            android:text="25°C/30°C"/>
+    </LinearLayout>
+</LinearLayout>

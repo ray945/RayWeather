@@ -43,7 +43,7 @@
             android:layout_marginTop="10dp"
             android:textColor="@color/card_text_color"
             android:textSize="15sp"
-            android:text="v1.0"/>
+            android:text="v1.1"/>
     </LinearLayout>
 
     <LinearLayout

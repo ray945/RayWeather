@@ -1,5 +1,6 @@
 package com.ray_world.rweather.activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,7 +9,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ray_world.rweather.R;
@@ -52,10 +53,14 @@ public class WeatherActivity extends AppCompatActivity {
     private ImageView preImage2;
     private ImageView preImage3;
     private ImageView preImage4;
-    private TextView preWeatherText1;
-    private TextView preWeatherText2;
-    private TextView preWeatherText3;
-    private TextView preWeatherText4;
+    private TextView preWeatherMinText1;
+    private TextView preWeatherMaxText1;
+    private TextView preWeatherMinText2;
+    private TextView preWeatherMaxText2;
+    private TextView preWeatherMinText3;
+    private TextView preWeatherMaxText3;
+    private TextView preWeatherMinText4;
+    private TextView preWeatherMaxText4;
     private TextView windText;
     private TextView humidityText;
     private TextView dressingText;
@@ -66,6 +71,22 @@ public class WeatherActivity extends AppCompatActivity {
     private TextView aqiText;
     private TextView pmText;
     private ImageView image;
+    private TextView timeAreaText1;
+    private TextView timeAreaText2;
+    private TextView timeAreaText3;
+    private TextView timeAreaText4;
+    private TextView timeWeatherText1;
+    private TextView timeWeatherText2;
+    private TextView timeWeatherText3;
+    private TextView timeWeatherText4;
+    private TextView timeTempText1;
+    private TextView timeTempText2;
+    private TextView timeTempText3;
+    private TextView timeTempText4;
+    private ImageView timeImage1;
+    private ImageView timeImage2;
+    private ImageView timeImage3;
+    private ImageView timeImage4;
     private NavigationView mNavigationView;
     private FrameLayout header;
 
@@ -77,6 +98,7 @@ public class WeatherActivity extends AppCompatActivity {
     private RWeatherDB rWeatherDB;
     boolean isWeatherHandled = false;
     boolean isPMHandled = false;
+    boolean isTimeWeatherHandled = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -98,10 +120,14 @@ public class WeatherActivity extends AppCompatActivity {
         preImage2 = (ImageView) findViewById(R.id.pre_image2);
         preImage3 = (ImageView) findViewById(R.id.pre_image3);
         preImage4 = (ImageView) findViewById(R.id.pre_image4);
-        preWeatherText1 = (TextView) findViewById(R.id.pre_weather1);
-        preWeatherText2 = (TextView) findViewById(R.id.pre_weather2);
-        preWeatherText3 = (TextView) findViewById(R.id.pre_weather3);
-        preWeatherText4 = (TextView) findViewById(R.id.pre_weather4);
+        preWeatherMinText1 = (TextView) findViewById(R.id.pre_weather1_min);
+        preWeatherMaxText1 = (TextView) findViewById(R.id.pre_weather1_max);
+        preWeatherMinText2 = (TextView) findViewById(R.id.pre_weather2_min);
+        preWeatherMaxText2 = (TextView) findViewById(R.id.pre_weather2_max);
+        preWeatherMinText3 = (TextView) findViewById(R.id.pre_weather3_min);
+        preWeatherMaxText3 = (TextView) findViewById(R.id.pre_weather3_max);
+        preWeatherMinText4 = (TextView) findViewById(R.id.pre_weather4_min);
+        preWeatherMaxText4 = (TextView) findViewById(R.id.pre_weather4_max);
         windText = (TextView) findViewById(R.id.wind_text);
         humidityText = (TextView) findViewById(R.id.humidity_text);
         dressingText = (TextView) findViewById(R.id.cy_des_text);
@@ -113,6 +139,22 @@ public class WeatherActivity extends AppCompatActivity {
         pmText = (TextView) findViewById(R.id.pm_text);
         mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
         header = (FrameLayout) findViewById(R.id.header);
+        timeAreaText1 = (TextView) findViewById(R.id.time_area);
+        timeAreaText2 = (TextView) findViewById(R.id.time_area2);
+        timeAreaText3 = (TextView) findViewById(R.id.time_area3);
+        timeAreaText4 = (TextView) findViewById(R.id.time_area4);
+        timeWeatherText1 = (TextView) findViewById(R.id.time_weather);
+        timeWeatherText2 = (TextView) findViewById(R.id.time_weather2);
+        timeWeatherText3 = (TextView) findViewById(R.id.time_weather3);
+        timeWeatherText4 = (TextView) findViewById(R.id.time_weather4);
+        timeImage1  = (ImageView) findViewById(R.id.time_image);
+        timeImage2  = (ImageView) findViewById(R.id.time_image2);
+        timeImage3  = (ImageView) findViewById(R.id.time_image3);
+        timeImage4  = (ImageView) findViewById(R.id.time_image4);
+        timeTempText1 = (TextView) findViewById(R.id.time_temp);
+        timeTempText2 = (TextView) findViewById(R.id.time_temp2);
+        timeTempText3 = (TextView) findViewById(R.id.time_temp3);
+        timeTempText4 = (TextView) findViewById(R.id.time_temp4);
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -156,12 +198,108 @@ public class WeatherActivity extends AppCompatActivity {
             queryWeatherInfo(cityName);
         } else {
             showWeather();
+            reFreshWeather();
         }
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 reFreshWeather();
+            }
+        });
+
+        View hourWeather = findViewById(R.id.hour_weather);
+        hourWeather.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LinearLayout diag = (LinearLayout) getLayoutInflater()
+                        .inflate(R.layout.hour_weather_layout, null);
+                AlertDialog builder = new AlertDialog.Builder(WeatherActivity.this)
+                        .setView(diag)
+                        .create();
+                TextView timeAreaText1 = (TextView) diag.findViewById(R.id.time_area);
+                TextView timeAreaText2 = (TextView) diag.findViewById(R.id.time_area2);
+                TextView timeAreaText3 = (TextView) diag.findViewById(R.id.time_area3);
+                TextView timeAreaText4 = (TextView) diag.findViewById(R.id.time_area4);
+                TextView timeAreaText5 = (TextView) diag.findViewById(R.id.time_area5);
+                TextView timeAreaText6 = (TextView) diag.findViewById(R.id.time_area6);
+                TextView timeAreaText7 = (TextView) diag.findViewById(R.id.time_area7);
+                TextView timeAreaText8 = (TextView) diag.findViewById(R.id.time_area8);
+                TextView timeWeatherText1 = (TextView) diag.findViewById(R.id.time_weather);
+                TextView timeWeatherText2 = (TextView) diag.findViewById(R.id.time_weather2);
+                TextView timeWeatherText3 = (TextView) diag.findViewById(R.id.time_weather3);
+                TextView timeWeatherText4 = (TextView) diag.findViewById(R.id.time_weather4);
+                TextView timeWeatherText5 = (TextView) diag.findViewById(R.id.time_weather5);
+                TextView timeWeatherText6 = (TextView) diag.findViewById(R.id.time_weather6);
+                TextView timeWeatherText7 = (TextView) diag.findViewById(R.id.time_weather7);
+                TextView timeWeatherText8 = (TextView) diag.findViewById(R.id.time_weather8);
+                TextView timeTempText1 = (TextView) diag.findViewById(R.id.time_temp);
+                TextView timeTempText2 = (TextView) diag.findViewById(R.id.time_temp2);
+                TextView timeTempText3 = (TextView) diag.findViewById(R.id.time_temp3);
+                TextView timeTempText4 = (TextView) diag.findViewById(R.id.time_temp4);
+                TextView timeTempText5 = (TextView) diag.findViewById(R.id.time_temp5);
+                TextView timeTempText6 = (TextView) diag.findViewById(R.id.time_temp6);
+                TextView timeTempText7 = (TextView) diag.findViewById(R.id.time_temp7);
+                TextView timeTempText8 = (TextView) diag.findViewById(R.id.time_temp8);
+                ImageView timeImage1 = (ImageView) diag.findViewById(R.id.time_image);
+                ImageView timeImage2 = (ImageView) diag.findViewById(R.id.time_image2);
+                ImageView timeImage3 = (ImageView) diag.findViewById(R.id.time_image3);
+                ImageView timeImage4 = (ImageView) diag.findViewById(R.id.time_image4);
+                ImageView timeImage5 = (ImageView) diag.findViewById(R.id.time_image5);
+                ImageView timeImage6 = (ImageView) diag.findViewById(R.id.time_image6);
+                ImageView timeImage7 = (ImageView) diag.findViewById(R.id.time_image7);
+                ImageView timeImage8 = (ImageView) diag.findViewById(R.id.time_image8);
+                SharedPreferences prefs = PreferenceManager
+                        .getDefaultSharedPreferences(WeatherActivity.this);
+                timeAreaText1.setText(prefs.getString("sh1", "") + "时-" + prefs.getString("eh1", "")
+                        + "时");
+                timeAreaText2.setText(prefs.getString("sh2", "") + "时-" + prefs.getString("eh2", "")
+                        + "时");
+                timeAreaText3.setText(prefs.getString("sh3", "") + "时-" + prefs.getString("eh3", "")
+                        + "时");
+                timeAreaText4.setText(prefs.getString("sh4", "") + "时-" + prefs.getString("eh4", "")
+                        + "时");
+                timeAreaText5.setText(prefs.getString("sh5", "") + "时-" + prefs.getString("eh5", "")
+                        + "时");
+                timeAreaText6.setText(prefs.getString("sh6", "") + "时-" + prefs.getString("eh6", "")
+                        + "时");
+                timeAreaText7.setText(prefs.getString("sh7", "") + "时-" + prefs.getString("eh7", "")
+                        + "时");
+                timeAreaText8.setText(prefs.getString("sh8", "") + "时-" + prefs.getString("eh8", "")
+                        + "时");
+                timeWeatherText1.setText(prefs.getString("weather1", ""));
+                timeWeatherText2.setText(prefs.getString("weather2", ""));
+                timeWeatherText3.setText(prefs.getString("weather3", ""));
+                timeWeatherText4.setText(prefs.getString("weather4", ""));
+                timeWeatherText5.setText(prefs.getString("weather5", ""));
+                timeWeatherText6.setText(prefs.getString("weather6", ""));
+                timeWeatherText7.setText(prefs.getString("weather7", ""));
+                timeWeatherText8.setText(prefs.getString("weather8", ""));
+                setImage(timeImage1, "weatherId1");
+                setImage(timeImage2, "weatherId2");
+                setImage(timeImage3, "weatherId3");
+                setImage(timeImage4, "weatherId4");
+                setImage(timeImage5, "weatherId5");
+                setImage(timeImage6, "weatherId6");
+                setImage(timeImage7, "weatherId7");
+                setImage(timeImage8, "weatherId8");
+                timeTempText1.setText(prefs.getString("tempMin1", "") + "℃/" + prefs
+                        .getString("tempMax1", "") + "℃");
+                timeTempText2.setText(prefs.getString("tempMin2", "") + "℃/" + prefs
+                        .getString("tempMax2", "") + "℃");
+                timeTempText3.setText(prefs.getString("tempMin3", "") + "℃/" + prefs
+                        .getString("tempMax3", "") + "℃");
+                timeTempText4.setText(prefs.getString("tempMin4", "") + "℃/" + prefs
+                        .getString("tempMax4", "") + "℃");
+                timeTempText5.setText(prefs.getString("tempMin5", "") + "℃/" + prefs
+                        .getString("tempMax5", "") + "℃");
+                timeTempText6.setText(prefs.getString("tempMin6", "") + "℃/" + prefs
+                        .getString("tempMax6", "") + "℃");
+                timeTempText7.setText(prefs.getString("tempMin7", "") + "℃/" + prefs
+                        .getString("tempMax7", "") + "℃");
+                timeTempText8.setText(prefs.getString("tempMin8", "") + "℃/" + prefs
+                        .getString("tempMax8", "") + "℃");
+                builder.show();
             }
         });
     }
@@ -191,6 +329,8 @@ public class WeatherActivity extends AppCompatActivity {
 
 
     public void queryWeatherInfo(String cityName) {
+
+        //基础天气信息
         Parameters parameters = new Parameters();
         parameters.add("cityname", cityName);
         parameters.add("format", 2);
@@ -214,7 +354,7 @@ public class WeatherActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            if (isPMHandled) {
+                            if (isPMHandled && isTimeWeatherHandled) {
                                 showWeather();
                             }
                         }
@@ -239,6 +379,7 @@ public class WeatherActivity extends AppCompatActivity {
             }
         });
 
+        //空气质量信息
         Parameters parameters2 = new Parameters();
         parameters2.add("city", cityName);
         JuheData.executeWithAPI(this, 33, "http://web.juhe.cn:8080/environment/air/pm"
@@ -250,7 +391,44 @@ public class WeatherActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (isWeatherHandled) {
+                        if (isWeatherHandled && isTimeWeatherHandled) {
+                            showWeather();
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+
+            @Override
+            public void onFailure(int i, String s, Throwable throwable) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        toolbar.setTitle("同步失败");
+                    }
+                });
+                Log.e("error", throwable.getMessage());
+            }
+        });
+
+        //每3小时预报信息
+        Parameters parameters3 = new Parameters();
+        parameters3.add("cityname", cityName);
+        JuheData.executeWithAPI(this, 39, "http://v.juhe.cn/weather/forecast3h"
+                , JuheData.GET, parameters3, new DataCallBack() {
+            @Override
+            public void onSuccess(int i, String response) {
+                Log.i("text", response);
+                Utility.handleTimeWeatherResponse(WeatherActivity.this, response);
+                isTimeWeatherHandled = true;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (isWeatherHandled && isPMHandled) {
                             showWeather();
                         }
                     }
@@ -277,7 +455,10 @@ public class WeatherActivity extends AppCompatActivity {
 
 
     private void showWeather() {
-        Log.i("test", "showPreWeather");
+        Log.i("test", "showWeather");
+        isPMHandled = false;
+        isTimeWeatherHandled = false;
+        isWeatherHandled = false;
         mSwipeRefreshLayout.setRefreshing(false);
         toolbar.setTitle("Ray天气");
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -297,13 +478,13 @@ public class WeatherActivity extends AppCompatActivity {
         exerciseText.setText(prefs.getString("exercise", ""));
         //设置Image
         setImage(image, "img1");
-        setTemp(preWeatherText1, "preTemp1");
+        setTemp(preWeatherMinText1, preWeatherMaxText1, "preTemp1");
         setImage(preImage1, "preImage1");
-        setTemp(preWeatherText2, "preTemp2");
+        setTemp(preWeatherMinText2, preWeatherMaxText2, "preTemp2");
         setImage(preImage2, "preImage2");
-        setTemp(preWeatherText3, "preTemp3");
+        setTemp(preWeatherMinText3, preWeatherMaxText3, "preTemp3");
         setImage(preImage3, "preImage3");
-        setTemp(preWeatherText4, "preTemp4");
+        setTemp(preWeatherMinText4, preWeatherMaxText4, "preTemp4");
         setImage(preImage4, "preImage4");
         Calendar c = Calendar.getInstance();
         setWeek(preDayText1, "preWeek1");
@@ -328,6 +509,31 @@ public class WeatherActivity extends AppCompatActivity {
         } else {
             quelityText.setBackgroundResource(R.color.heavy);
         }
+
+        timeAreaText1.setText(prefs.getString("sh1", "") + "时-" + prefs.getString("eh1", "")
+                + "时");
+        timeAreaText2.setText(prefs.getString("sh2", "") + "时-" + prefs.getString("eh2", "")
+                + "时");
+        timeAreaText3.setText(prefs.getString("sh3", "") + "时-" + prefs.getString("eh3", "")
+                + "时");
+        timeAreaText4.setText(prefs.getString("sh4", "") + "时-" + prefs.getString("eh4", "")
+                + "时");
+        timeWeatherText1.setText(prefs.getString("weather1", ""));
+        timeWeatherText2.setText(prefs.getString("weather2", ""));
+        timeWeatherText3.setText(prefs.getString("weather3", ""));
+        timeWeatherText4.setText(prefs.getString("weather4", ""));
+        setImage(timeImage1, "weatherId1");
+        setImage(timeImage2, "weatherId2");
+        setImage(timeImage3, "weatherId3");
+        setImage(timeImage4, "weatherId4");
+        timeTempText1.setText(prefs.getString("tempMin1", "") + "℃/" + prefs
+                .getString("tempMax1", "") + "℃");
+        timeTempText2.setText(prefs.getString("tempMin2", "") + "℃/" + prefs
+                .getString("tempMax2", "") + "℃");
+        timeTempText3.setText(prefs.getString("tempMin3", "") + "℃/" + prefs
+                .getString("tempMax3", "") + "℃");
+        timeTempText4.setText(prefs.getString("tempMin4", "") + "℃/" + prefs
+                .getString("tempMax4", "") + "℃");
     }
 
     public void setWeek(TextView tv, String str) {
@@ -358,11 +564,12 @@ public class WeatherActivity extends AppCompatActivity {
         }
     }
 
-    public void setTemp(TextView tv, String str) {
+    public void setTemp(TextView tv1, TextView tv2, String str) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String string = prefs.getString(str, "");
         String[] array = string.split("~");
-        tv.setText(array[0] + "/" + array[1]);
+        tv1.setText(array[0]);
+        tv2.setText(array[1]);
     }
 
     public void setImage(ImageView image, String str) {
