@@ -64,8 +64,9 @@ public class ManageCityActivity extends AppCompatActivity {
                 Map<String, String> item = (Map<String, String>) adapterView
                         .getItemAtPosition(position);
                 String cityName = item.get("cityName");
+                Log.d("RayTest", cityName);
                 Intent intent = new Intent(ManageCityActivity.this, WeatherActivity.class);
-                intent.putExtra("city_name", cityName);
+                intent.putExtra("district_name", cityName);
                 startActivity(intent);
                 finish();
             }
@@ -89,9 +90,16 @@ public class ManageCityActivity extends AppCompatActivity {
 
                                 if (!rWeatherDB.checkSelectedCity(currentCity)) {
                                     flag = 1;
-                                    Map<String, String> item = (Map<String, String>) adapterView
-                                            .getItemAtPosition(0);
-                                    currentCity = item.get("cityName");
+                                    if (adapterView.getCount() == 0) {
+                                        Intent intent = new Intent(ManageCityActivity.this, ChooseCityActivity.class);
+                                        intent.putExtra("from_manage_city_activity", true);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        Map<String, String> item = (Map<String, String>) adapterView
+                                                .getItemAtPosition(0);
+                                        currentCity = item.get("cityName");
+                                    }
                                 } else {
                                     flag = 0;
                                 }
@@ -142,7 +150,7 @@ public class ManageCityActivity extends AppCompatActivity {
         if (flag == 1) {
             flag = 0;
             Intent intent = new Intent(ManageCityActivity.this, WeatherActivity.class);
-            intent.putExtra("city_name", currentCity);
+            intent.putExtra("district_name", currentCity);
             startActivity(intent);
         } else {
             super.onBackPressed();

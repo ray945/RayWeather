@@ -176,7 +176,7 @@ public class WeatherActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 mDrawerLayout.closeDrawer(Gravity.LEFT);
                 if (menuItem.getItemId() == R.id.item_add_city) {
-                    Intent intent = new Intent(WeatherActivity.this, ChooseAreaActivity.class);
+                    Intent intent = new Intent(WeatherActivity.this, ChooseCityActivity.class);
                     intent.putExtra("from_weather_activity", true);
                     startActivity(intent);
                     finish();
@@ -192,10 +192,11 @@ public class WeatherActivity extends AppCompatActivity {
             }
         });
 
+        String districtName = getIntent().getStringExtra("district_name");
         String cityName = getIntent().getStringExtra("city_name");
-        if (!TextUtils.isEmpty(cityName)) {
+        if (!TextUtils.isEmpty(districtName) || !TextUtils.isEmpty(cityName)) {
             toolbar.setTitle("同步中……");
-            queryWeatherInfo(cityName);
+            queryWeatherInfo(districtName, cityName);
         } else {
             showWeather();
             reFreshWeather();
@@ -283,25 +284,40 @@ public class WeatherActivity extends AppCompatActivity {
                 setImage(timeImage6, "weatherId6");
                 setImage(timeImage7, "weatherId7");
                 setImage(timeImage8, "weatherId8");
-                timeTempText1.setText(prefs.getString("tempMin1", "") + "℃/" + prefs
-                        .getString("tempMax1", "") + "℃");
-                timeTempText2.setText(prefs.getString("tempMin2", "") + "℃/" + prefs
-                        .getString("tempMax2", "") + "℃");
-                timeTempText3.setText(prefs.getString("tempMin3", "") + "℃/" + prefs
-                        .getString("tempMax3", "") + "℃");
-                timeTempText4.setText(prefs.getString("tempMin4", "") + "℃/" + prefs
-                        .getString("tempMax4", "") + "℃");
-                timeTempText5.setText(prefs.getString("tempMin5", "") + "℃/" + prefs
-                        .getString("tempMax5", "") + "℃");
-                timeTempText6.setText(prefs.getString("tempMin6", "") + "℃/" + prefs
-                        .getString("tempMax6", "") + "℃");
-                timeTempText7.setText(prefs.getString("tempMin7", "") + "℃/" + prefs
-                        .getString("tempMax7", "") + "℃");
-                timeTempText8.setText(prefs.getString("tempMin8", "") + "℃/" + prefs
-                        .getString("tempMax8", "") + "℃");
+
+                setText(timeTempText1, prefs.getString("tempMin1", ""), prefs
+                        .getString("tempMax1", ""));
+                setText(timeTempText2, prefs.getString("tempMin2", ""), prefs
+                        .getString("tempMax2", ""));
+                setText(timeTempText3, prefs.getString("tempMin3", ""), prefs
+                        .getString("tempMax3", ""));
+                setText(timeTempText4, prefs.getString("tempMin4", ""), prefs
+                        .getString("tempMax4", ""));
+                setText(timeTempText5, prefs.getString("tempMin5", ""), prefs
+                        .getString("tempMax5", ""));
+                setText(timeTempText6, prefs.getString("tempMin6", ""), prefs
+                        .getString("tempMax6", ""));
+                setText(timeTempText7, prefs.getString("tempMin7", ""), prefs
+                        .getString("tempMax7", ""));
+                setText(timeTempText8, prefs.getString("tempMin8", ""), prefs
+                        .getString("tempMax8", ""));
                 builder.show();
             }
         });
+    }
+
+    private void setText(TextView tv, String temp1, String temp2) {
+        int change = 0;
+        int min = Integer.valueOf(temp1);
+        int max = Integer.valueOf(temp2);
+        if (min > max) {
+            change = min;
+            min = max;
+            max = change;
+            tv.setText(min + "℃~" + max + "℃");
+        } else {
+            tv.setText(min + "℃~" + max + "℃");
+        }
     }
 
     private void initToolbar() {
@@ -320,19 +336,21 @@ public class WeatherActivity extends AppCompatActivity {
         toolbar.setTitle("同步中...");
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(WeatherActivity.this);
-        String cityName = prefs.getString("cityName", "");
-        if (!TextUtils.isEmpty(cityName)) {
+        String districtName = prefs.getString("cityName", "");
+        String cityName = prefs.getString("city", "");
+        if (!TextUtils.isEmpty(districtName)) {
             Log.i("test", "getCityName");
-            queryWeatherInfo(cityName);
+            queryWeatherInfo(districtName, cityName);
         }
     }
 
 
-    public void queryWeatherInfo(String cityName) {
+    public void queryWeatherInfo(String districtName, String cityName) {
+        Log.d("RayTest", "district = " + districtName + " city = " + cityName);
 
         //基础天气信息
         Parameters parameters = new Parameters();
-        parameters.add("cityname", cityName);
+        parameters.add("cityname", districtName);
         parameters.add("format", 2);
         JuheData.executeWithAPI(this, 39, "http://v.juhe.cn/weather/index", JuheData.GET
                 , parameters, new DataCallBack() {
@@ -343,9 +361,9 @@ public class WeatherActivity extends AppCompatActivity {
                     isWeatherHandled = true;
                     SharedPreferences prefs = PreferenceManager
                             .getDefaultSharedPreferences(WeatherActivity.this);
-                    String cityName = prefs.getString("cityName", "");
+                    String districtName = prefs.getString("cityName", "");
                     String cityTemp = prefs.getString("temp", "");
-                    SelectedCity selectedCity = new SelectedCity(cityName, cityTemp);
+                    SelectedCity selectedCity = new SelectedCity(districtName, cityTemp);
                     if (!rWeatherDB.checkSelectedCity(selectedCity.getCityName())) {
                         rWeatherDB.saveSelectedCity(selectedCity);
                     } else {
@@ -382,6 +400,7 @@ public class WeatherActivity extends AppCompatActivity {
         //空气质量信息
         Parameters parameters2 = new Parameters();
         parameters2.add("city", cityName);
+        Log.d("RayTest", "pm cityName = " + cityName);
         JuheData.executeWithAPI(this, 33, "http://web.juhe.cn:8080/environment/air/pm"
                 , JuheData.GET, parameters2, new DataCallBack() {
             @Override
@@ -417,7 +436,7 @@ public class WeatherActivity extends AppCompatActivity {
 
         //每3小时预报信息
         Parameters parameters3 = new Parameters();
-        parameters3.add("cityname", cityName);
+        parameters3.add("cityname", districtName);
         JuheData.executeWithAPI(this, 39, "http://v.juhe.cn/weather/forecast3h"
                 , JuheData.GET, parameters3, new DataCallBack() {
             @Override
@@ -466,9 +485,15 @@ public class WeatherActivity extends AppCompatActivity {
         tempText.setText(prefs.getString("temp", "") + "°");
         weatherText.setText(prefs.getString("temperature", ""));
         String string = prefs.getString("temperature", "");
+        Log.d("RayTest", "string = " + string);
         String[] array = string.split("~");
         weatherText.setText(array[0] + " ~ " + array[1]);
-        weatherDespText.setText(prefs.getString("weatherDesp", ""));
+        if (prefs.getString("weatherDesp", "").contains("转")) {
+            String[] info = prefs.getString("weatherDesp", "").split("转");
+            weatherDespText.setText(info[0] + "\n转" +info[1]);
+        } else {
+            weatherDespText.setText(prefs.getString("weatherDesp", ""));
+        }
         publishText.setText(prefs.getString("refreshTime", "") + "更新");
         windText.setText(prefs.getString("windDirection", "") + prefs.getString("windStrength", ""));
         humidityText.setText("湿度" + prefs.getString("humidity", ""));
@@ -526,14 +551,14 @@ public class WeatherActivity extends AppCompatActivity {
         setImage(timeImage2, "weatherId2");
         setImage(timeImage3, "weatherId3");
         setImage(timeImage4, "weatherId4");
-        timeTempText1.setText(prefs.getString("tempMin1", "") + "℃/" + prefs
-                .getString("tempMax1", "") + "℃");
-        timeTempText2.setText(prefs.getString("tempMin2", "") + "℃/" + prefs
-                .getString("tempMax2", "") + "℃");
-        timeTempText3.setText(prefs.getString("tempMin3", "") + "℃/" + prefs
-                .getString("tempMax3", "") + "℃");
-        timeTempText4.setText(prefs.getString("tempMin4", "") + "℃/" + prefs
-                .getString("tempMax4", "") + "℃");
+        setText(timeTempText1, prefs.getString("tempMin1", ""), prefs
+                .getString("tempMax1", ""));
+        setText(timeTempText2, prefs.getString("tempMin2", ""), prefs
+                .getString("tempMax2", ""));
+        setText(timeTempText3, prefs.getString("tempMin3", ""), prefs
+                .getString("tempMax3", ""));
+        setText(timeTempText4, prefs.getString("tempMin4", ""), prefs
+                .getString("tempMax4", ""));
     }
 
     public void setWeek(TextView tv, String str) {

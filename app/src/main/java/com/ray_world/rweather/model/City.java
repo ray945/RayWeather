@@ -5,9 +5,9 @@ package com.ray_world.rweather.model;
  */
 public class City {
     private int id;
-    private String cityName;
-    private String cityCode;
-    private int provinceId;
+    private String province;
+    private String city;
+    private String district;
 
     public int getId() {
         return id;
@@ -17,27 +17,27 @@ public class City {
         this.id = id;
     }
 
-    public String getCityName() {
-        return cityName;
+    public String getProvince() {
+        return province;
     }
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
+    public void setProvince(String province) {
+        this.province = province;
     }
 
-    public String getCityCode() {
-        return cityCode;
+    public String getCity() {
+        return city;
     }
 
-    public void setCityCode(String cityCode) {
-        this.cityCode = cityCode;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public int getProvinceId() {
-        return provinceId;
+    public String getDistrict() {
+        return district;
     }
 
-    public void setProvinceId(int provinceId) {
-        this.provinceId = provinceId;
+    public void setDistrict(String district) {
+        this.district = district;
     }
 }

@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        app:navigationIcon="@drawable/ic_arrow_back_white_18dp"
+        app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
         app:titleTextAppearance="@style/textStyle"
         app:title="关于"/>
 
@@ -43,7 +43,7 @@
             android:layout_marginTop="10dp"
             android:textColor="@color/card_text_color"
             android:textSize="15sp"
-            android:text="v1.1"/>
+            android:text="@string/app_version"/>
     </LinearLayout>
 
     <LinearLayout

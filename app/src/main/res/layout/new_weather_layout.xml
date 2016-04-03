@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
-            app:navigationIcon="@drawable/ic_menu_white_18dp"
+            app:navigationIcon="@drawable/ic_menu_white_24dp"
             app:titleTextAppearance="@style/textStyle"
             app:title="Ray天气"/>
 
@@ -51,7 +51,7 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="300dp"
+                            android:layout_height="320dp"
                             android:layout_marginTop="20dp"
                             android:layout_marginLeft="15dp"
                             android:layout_marginRight="15dp"
@@ -83,10 +83,10 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:gravity="right"
-                                    android:layout_marginTop="30dp"
+                                    android:layout_marginTop="25dp"
                                     android:layout_marginRight="30dp"
                                     android:textColor="@color/card_text_color"
-                                    android:textSize="20sp"/>
+                                    android:textSize="18sp"/>
                             </LinearLayout>
 
                             <LinearLayout

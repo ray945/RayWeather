@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ray_world.rweather">
 
@@ -11,38 +12,34 @@
     <application
         android:name=".util.JuheApplication"
         android:allowBackup="true"
-        android:label="@string/app_name"
         android:icon="@drawable/icon"
+        android:label="@string/app_name"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="com.thinkland.juheapi.openid"
             android:value="JH530b43edb322da6317689451a2d5b168" />
 
         <activity
-            android:name=".activity.ChooseAreaActivity"
+            android:name=".activity.ChooseCityActivity"
             android:label="@string/app_name"
             android:theme="@style/ChooseAreaTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".activity.WeatherActivity"
-            android:label="@string/app_name">
-        </activity>
-
-        <activity android:name=".activity.ManageCityActivity"
+        <activity
+            android:name=".activity.WeatherActivity"
+            android:label="@string/app_name"></activity>
+        <activity
+            android:name=".activity.ManageCityActivity"
             android:label="管理城市"
-            android:theme="@style/ChooseAreaTheme">
-        </activity>
-
-        <activity android:name=".activity.AboutActivity"
+            android:theme="@style/ChooseAreaTheme"></activity>
+        <activity
+            android:name=".activity.AboutActivity"
             android:label="关于"
-            android:theme="@style/ChooseAreaTheme">
-        </activity>
-
+            android:theme="@style/ChooseAreaTheme"></activity>
     </application>
 
 </manifest>

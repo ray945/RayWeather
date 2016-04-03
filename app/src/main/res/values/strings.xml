@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Ray天气</string>
+    <string name="app_version">v1.1</string>
 </resources>

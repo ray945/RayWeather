@@ -25,7 +25,28 @@ import java.text.SimpleDateFormat;
  */
 public class Utility {
 
-    public synchronized static boolean handleProvincesResponse(RWeatherDB rWeatherDB
+    public synchronized static City handleCityResponse(String cityName
+            , String response) throws JSONException {
+        City mCity = new City();
+        if (!TextUtils.isEmpty(response)) {
+            JSONObject jsonObject = new JSONObject(response);
+            String resultCode = jsonObject.getString("resultcode");
+            JSONArray results = jsonObject.getJSONArray("result");
+            for (int i = 0; i < results.length(); i++) {
+                JSONObject cityObj = results.getJSONObject(i);
+                mCity.setId(cityObj.getInt("id"));
+                mCity.setProvince(cityObj.getString("province"));
+                mCity.setCity(cityObj.getString("city"));
+                mCity.setDistrict(cityObj.getString("district"));
+                if (cityName.equals(mCity.getCity())) {
+                    return mCity;
+                }
+            }
+        }
+        return null;
+    }
+
+    /*public synchronized static boolean handleProvincesResponse(RWeatherDB rWeatherDB
             , String response) {
         if (!TextUtils.isEmpty(response)) {
             String[] allProvinces = response.split(",");
@@ -41,45 +62,45 @@ public class Utility {
             }
         }
         return false;
-    }
+    }*/
 
-    public static boolean handleCityResponse(RWeatherDB rWeatherDB
-            , String responsse, int provinceId) {
-        if (!TextUtils.isEmpty(responsse)) {
-            String[] allCities = responsse.split(",");
-            if (allCities != null && allCities.length > 0) {
-                for (String c : allCities) {
-                    String[] array = c.split("\\|");
-                    City city = new City();
-                    city.setCityCode(array[0]);
-                    city.setCityName(array[1]);
-                    city.setProvinceId(provinceId);
-                    rWeatherDB.saveCity(city);
-                }
-                return true;
-            }
-        }
-        return false;
-    }
+//    public static boolean handleCityResponse(RWeatherDB rWeatherDB
+//            , String responsse, int provinceId) {
+//        if (!TextUtils.isEmpty(responsse)) {
+//            String[] allCities = responsse.split(",");
+//            if (allCities != null && allCities.length > 0) {
+//                for (String c : allCities) {
+//                    String[] array = c.split("\\|");
+//                    City city = new City();
+//                    city.setCityCode(array[0]);
+//                    city.setCityName(array[1]);
+//                    city.setProvinceId(provinceId);
+//                    rWeatherDB.saveCity(city);
+//                }
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
-    public static boolean handleCountiesResponse(RWeatherDB rWeatherDB
-            , String response, int cityId) {
-        if (!TextUtils.isEmpty(response)) {
-            String[] allCounties = response.split(",");
-            if (allCounties != null && allCounties.length > 0) {
-                for (String c : allCounties) {
-                    String[] array = c.split("\\|");
-                    County county = new County();
-                    county.setCountyCode(array[0]);
-                    county.setCountyName(array[1]);
-                    county.setCityId(cityId);
-                    rWeatherDB.saveCounty(county);
-                }
-                return true;
-            }
-        }
-        return false;
-    }
+//    public static boolean handleCountiesResponse(RWeatherDB rWeatherDB
+//            , String response, int cityId) {
+//        if (!TextUtils.isEmpty(response)) {
+//            String[] allCounties = response.split(",");
+//            if (allCounties != null && allCounties.length > 0) {
+//                for (String c : allCounties) {
+//                    String[] array = c.split("\\|");
+//                    County county = new County();
+//                    county.setCountyCode(array[0]);
+//                    county.setCountyName(array[1]);
+//                    county.setCityId(cityId);
+//                    rWeatherDB.saveCounty(county);
+//                }
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 
     public static void handlePMResponse(Context context, String response) {
         Log.i("test", "handlePMResponse");
@@ -87,18 +108,20 @@ public class Utility {
             JSONObject jsonObject = new JSONObject(response);
             JSONArray results = jsonObject.getJSONArray("result");
             JSONObject result = results.getJSONObject(0);
+            String city = result.getString("city");
             String aqi = result.getString("AQI");
             String pm = result.getString("PM2.5");
             String quality = result.getString("quality");
-            savePMResponse(context, aqi, pm, quality);
+            savePMResponse(context,city, aqi, pm, quality);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    private static void savePMResponse(Context context, String aqi, String pm, String quality) {
+    private static void savePMResponse(Context context,String city, String aqi, String pm, String quality) {
         SharedPreferences.Editor editor = PreferenceManager
                 .getDefaultSharedPreferences(context).edit();
+        editor.putString("city", city);
         editor.putString("aqi", aqi);
         editor.putString("pm", pm);
         editor.putString("quality", quality);
@@ -272,6 +295,7 @@ public class Utility {
 
         try {
             Log.i("test", "handleWeatherResponse");
+            Log.d("RayTest", response);
             JSONObject jsonObject = new JSONObject(response);
             JSONObject result = jsonObject.getJSONObject("result");
 
