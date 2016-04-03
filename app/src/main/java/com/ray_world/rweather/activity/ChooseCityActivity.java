@@ -124,6 +124,7 @@ public class ChooseCityActivity extends AppCompatActivity {
         public void run() {
             cityNameInput = cityText.getText().toString();
             Log.d("RayTest", "cityNameInput = " + cityNameInput);
+            dataList.clear();
             queryCity(cityNameInput);
         }
     };
@@ -146,6 +147,7 @@ public class ChooseCityActivity extends AppCompatActivity {
                             String result = cityObj.getString("district");
                             if (result.equals(cityName) || result.contains(cityName)) {
                                 cityError.setVisibility(View.GONE);
+                                Log.d("RayTest", "cityError gone");
                                 city.setId(cityObj.getInt("id"));
                                 city.setProvince(cityObj.getString("province"));
                                 city.setCity(cityObj.getString("city"));
@@ -157,10 +159,11 @@ public class ChooseCityActivity extends AppCompatActivity {
                                                 + "   " + city.getProvince());
                                     }
                                 });
-                            } else {
-                                cityError.setText("城市好像不正确哦→_→");
-                                cityError.setVisibility(View.VISIBLE);
                             }
+                        }
+                        if (dataList.size() == 0) {
+                            cityError.setText("城市好像不正确哦→_→");
+                            cityError.setVisibility(View.VISIBLE);
                         }
                         adapter.notifyDataSetChanged();
                     }

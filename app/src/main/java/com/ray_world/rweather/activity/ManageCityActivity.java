@@ -46,14 +46,14 @@ public class ManageCityActivity extends AppCompatActivity {
         setContentView(R.layout.manage_city);
         MyApplication.getInstance().addActivity(this);
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         currentCity = intent.getStringExtra("currentCity");
 
         initToolbar();
         manageCityist = (ListView) findViewById(R.id.manage_city_list);
 
         adapter = new SimpleAdapter(this, lists, R.layout.list_item_layout
-                , new String[] {"cityName", "temp"}
+                , new String[] {"districtName", "temp"}
                 , new int[] {R.id.city_name, R.id.temp});
         manageCityist.setAdapter(adapter);
         rWeatherDB = RWeatherDB.getInstance(this);
@@ -63,10 +63,12 @@ public class ManageCityActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Map<String, String> item = (Map<String, String>) adapterView
                         .getItemAtPosition(position);
+                String districtName = item.get("districtName");
                 String cityName = item.get("cityName");
-                Log.d("RayTest", cityName);
+                Log.d("RayTest", "manage district = " + districtName + " city = " + cityName);
                 Intent intent = new Intent(ManageCityActivity.this, WeatherActivity.class);
-                intent.putExtra("district_name", cityName);
+                intent.putExtra("district_name", districtName);
+                intent.putExtra("city_name", cityName);
                 startActivity(intent);
                 finish();
             }
@@ -80,12 +82,12 @@ public class ManageCityActivity extends AppCompatActivity {
                         .getItemAtPosition(position);
                 AlertDialog builder = new AlertDialog.Builder(ManageCityActivity.this)
                         .setTitle("删除提示")
-                        .setMessage("您确定要删除 " + item.get("cityName") + " 吗？")
+                        .setMessage("您确定要删除 " + item.get("districtName") + " 吗？")
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 lists.remove(item);
-                                rWeatherDB.deleteSelectedCity(item.get("cityName"));
+                                rWeatherDB.deleteSelectedCity(item.get("districtName"));
                                 adapter.notifyDataSetChanged();
 
                                 if (!rWeatherDB.checkSelectedCity(currentCity)) {
@@ -98,7 +100,7 @@ public class ManageCityActivity extends AppCompatActivity {
                                     } else {
                                         Map<String, String> item = (Map<String, String>) adapterView
                                                 .getItemAtPosition(0);
-                                        currentCity = item.get("cityName");
+                                        currentCity = item.get("districtName");
                                     }
                                 } else {
                                     flag = 0;
@@ -136,7 +138,9 @@ public class ManageCityActivity extends AppCompatActivity {
             lists.clear();
             for (SelectedCity selectedCity : selectedCityList) {
                 Map<String, String> list = new HashMap<>();
+                list.put("districtName", selectedCity.getDistrictName());
                 list.put("cityName", selectedCity.getCityName());
+                Log.d("RayTest", "query cityName = " + selectedCity.getCityName());
                 list.put("temp", selectedCity.getTemp());
                 lists.add(list);
             }

@@ -125,6 +125,8 @@ public class Utility {
         editor.putString("aqi", aqi);
         editor.putString("pm", pm);
         editor.putString("quality", quality);
+        editor.putBoolean("city_selected", true);
+        Log.d("RayTest", "savePMResponse city = " + city);
         editor.commit();
     }
 
@@ -357,7 +359,6 @@ public class Utility {
             , String preImage3, String preTemp3, String preWeek4, String preImage4, String preTemp4) {
         SharedPreferences.Editor editor = PreferenceManager
                 .getDefaultSharedPreferences(context).edit();
-        editor.putBoolean("city_selected", true);
         editor.putString("temp", temp);
         editor.putString("windDirection", windDirection);
         editor.putString("windStrength", windStrength);

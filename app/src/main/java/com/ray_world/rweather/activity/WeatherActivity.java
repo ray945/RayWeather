@@ -345,7 +345,7 @@ public class WeatherActivity extends AppCompatActivity {
     }
 
 
-    public void queryWeatherInfo(String districtName, String cityName) {
+    public void queryWeatherInfo(String districtName, final String cityName) {
         Log.d("RayTest", "district = " + districtName + " city = " + cityName);
 
         //基础天气信息
@@ -362,9 +362,11 @@ public class WeatherActivity extends AppCompatActivity {
                     SharedPreferences prefs = PreferenceManager
                             .getDefaultSharedPreferences(WeatherActivity.this);
                     String districtName = prefs.getString("cityName", "");
+                    String cityName = prefs.getString("city", "");
                     String cityTemp = prefs.getString("temp", "");
-                    SelectedCity selectedCity = new SelectedCity(districtName, cityTemp);
-                    if (!rWeatherDB.checkSelectedCity(selectedCity.getCityName())) {
+                    Log.d("RayTest", "prefs cityName = " + cityName);
+                    SelectedCity selectedCity = new SelectedCity(districtName,cityName, cityTemp);
+                    if (!rWeatherDB.checkSelectedCity(selectedCity.getDistrictName())) {
                         rWeatherDB.saveSelectedCity(selectedCity);
                     } else {
                         rWeatherDB.updateSelectedCity(selectedCity);
