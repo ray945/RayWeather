@@ -12,9 +12,9 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
+        app:navigationIcon="@drawable/ic_arrow_back_white_18dp"
         app:titleTextAppearance="@style/textStyle"
-        app:title="添加城市"/>
+        app:title="@string/add_city"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,7 +43,7 @@
             android:singleLine="true"
             android:background="@null"
             android:imeOptions="actionDone"
-            android:hint="请输入您的城市"/>
+            android:hint="@string/add_city_hint"/>
     </LinearLayout>
 
     <TextView

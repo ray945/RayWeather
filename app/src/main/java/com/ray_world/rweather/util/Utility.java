@@ -2,23 +2,16 @@ package com.ray_world.rweather.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
-import android.text.format.Time;
 import android.util.Log;
 
-import com.ray_world.rweather.R;
 import com.ray_world.rweather.model.City;
-import com.ray_world.rweather.model.County;
-import com.ray_world.rweather.model.Province;
-import com.ray_world.rweather.model.RWeatherDB;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 
 /**
  * Created by ray on 15-5-3.
@@ -45,62 +38,6 @@ public class Utility {
         }
         return null;
     }
-
-    /*public synchronized static boolean handleProvincesResponse(RWeatherDB rWeatherDB
-            , String response) {
-        if (!TextUtils.isEmpty(response)) {
-            String[] allProvinces = response.split(",");
-            if (allProvinces != null && allProvinces.length > 0) {
-                for (String p : allProvinces) {
-                    String[] array = p.split("\\|");
-                    Province province = new Province();
-                    province.setProvinceCode(array[0]);
-                    province.setProvinceName(array[1]);
-                    rWeatherDB.saveProvince(province);
-                }
-                return true;
-            }
-        }
-        return false;
-    }*/
-
-//    public static boolean handleCityResponse(RWeatherDB rWeatherDB
-//            , String responsse, int provinceId) {
-//        if (!TextUtils.isEmpty(responsse)) {
-//            String[] allCities = responsse.split(",");
-//            if (allCities != null && allCities.length > 0) {
-//                for (String c : allCities) {
-//                    String[] array = c.split("\\|");
-//                    City city = new City();
-//                    city.setCityCode(array[0]);
-//                    city.setCityName(array[1]);
-//                    city.setProvinceId(provinceId);
-//                    rWeatherDB.saveCity(city);
-//                }
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
-//    public static boolean handleCountiesResponse(RWeatherDB rWeatherDB
-//            , String response, int cityId) {
-//        if (!TextUtils.isEmpty(response)) {
-//            String[] allCounties = response.split(",");
-//            if (allCounties != null && allCounties.length > 0) {
-//                for (String c : allCounties) {
-//                    String[] array = c.split("\\|");
-//                    County county = new County();
-//                    county.setCountyCode(array[0]);
-//                    county.setCountyName(array[1]);
-//                    county.setCityId(cityId);
-//                    rWeatherDB.saveCounty(county);
-//                }
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
 
     public static void handlePMResponse(Context context, String response) {
         Log.i("test", "handlePMResponse");

@@ -13,7 +13,7 @@
         android:layout_marginLeft="20dp"
         android:textSize="18sp"
         android:textColor="@color/primary_color"
-        android:text="城市3小时天气预报"/>
+        android:text="@string/three_hours_weather"/>
 
     <LinearLayout
         android:layout_width="match_parent"

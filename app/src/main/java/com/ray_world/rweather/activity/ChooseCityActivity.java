@@ -48,11 +48,13 @@ public class ChooseCityActivity extends AppCompatActivity {
     Handler myHandler = new Handler();
 
     MyTextWatcher myTextWatcher;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_city);
+        toolbar = (Toolbar) findViewById(R.id.tool_bar);
         initToolbar();
 
         MyApplication.getInstance().addActivity(this);
@@ -68,6 +70,10 @@ public class ChooseCityActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
             return;
+        }
+
+        if (!isFromWeatherActivity) {
+            toolbar.setNavigationIcon(null);
         }
 
         listView = (ListView) findViewById(R.id.list_view_city);
@@ -192,7 +198,6 @@ public class ChooseCityActivity extends AppCompatActivity {
     }
 
     private void initToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

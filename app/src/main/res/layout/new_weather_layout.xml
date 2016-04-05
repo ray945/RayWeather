@@ -12,15 +12,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/tool_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            app:navigationIcon="@drawable/ic_menu_white_24dp"
             app:titleTextAppearance="@style/textStyle"
-            app:title="Ray天气"/>
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:title="@string/app_name"/>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -617,7 +617,7 @@
                                     android:layout_marginLeft="30dp"
                                     android:textColor="@color/primary_color"
                                     android:textSize="18sp"
-                                    android:text="空气质量"/>
+                                    android:text="@string/air_quality"/>
 
                                 <TextView
                                     android:id="@+id/quality_text"
@@ -645,7 +645,7 @@
                                     android:layout_alignParentLeft="true"
                                     android:textColor="@color/card_text_color"
                                     android:textSize="15sp"
-                                    android:text="AQI"/>
+                                    android:text="@string/AQI"/>
 
                                 <TextView
                                     android:id="@+id/aqi_text"
@@ -665,7 +665,7 @@
                                     android:layout_marginLeft="50dp"
                                     android:textColor="@color/card_text_color"
                                     android:textSize="15sp"
-                                    android:text="PM2.5"/>
+                                    android:text="@string/PM25"/>
 
                                 <TextView
                                     android:id="@+id/pm_text"
@@ -685,7 +685,7 @@
                                 android:layout_marginLeft="30dp"
                                 android:textColor="@color/primary_color"
                                 android:textSize="18sp"
-                                android:text="穿衣"/>
+                                android:text="@string/live_cloths"/>
 
                             <TextView
                                 android:id="@+id/cy_des_text"
@@ -717,7 +717,7 @@
                                         android:layout_marginLeft="30dp"
                                         android:textColor="@color/primary_color"
                                         android:textSize="18sp"
-                                        android:text="紫外线"/>
+                                        android:text="@string/live_purple_line"/>
 
                                     <TextView
                                         android:id="@+id/uv_text"
@@ -742,7 +742,7 @@
                                         android:layout_marginLeft="30dp"
                                         android:textColor="@color/primary_color"
                                         android:textSize="18sp"
-                                        android:text="洗车"/>
+                                        android:text="@string/live_wash_car"/>
 
                                     <TextView
                                         android:id="@+id/wash_text"
@@ -767,7 +767,7 @@
                                         android:layout_marginLeft="30dp"
                                         android:textColor="@color/primary_color"
                                         android:textSize="18sp"
-                                        android:text="运动"/>
+                                        android:text="@string/live_sports"/>
 
                                     <TextView
                                         android:id="@+id/exercise_text"
@@ -792,6 +792,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:fitsSystemWindows="true"
         app:headerLayout="@layout/header"
         android:elevation="10dp"
         app:menu="@menu/drawer"/>

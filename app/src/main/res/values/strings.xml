@@ -1,4 +1,19 @@
 <resources>
     <string name="app_name">Ray天气</string>
     <string name="app_version">v1.1</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="about">关于</string>
+    <string name="about_content">开发者：@Ray不忘初心\nhttp://www.ray-world.com\n天气数据来源于聚合数据</string>
+    <string name="add_city">添加城市</string>
+    <string name="add_city_hint">请输入您的城市</string>
+    <string name="three_hours_weather">城市3小时天气预报</string>
+    <string name="manage_city">管理城市</string>
+    <string name="air_quality">空气质量</string>
+    <string name="AQI">AQI</string>
+    <string name="PM25">PM2.5</string>
+    <string name="live_cloths">穿衣</string>
+    <string name="live_purple_line">紫外线</string>
+    <string name="live_wash_car">洗车</string>
+    <string name="live_sports">运动</string>
 </resources>

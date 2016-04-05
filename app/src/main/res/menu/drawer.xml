@@ -5,12 +5,12 @@
             android:id="@+id/item_add_city"
             android:checked="false"
             android:icon="@drawable/ic_pin_drop_white_18dp"
-            android:title="添加城市" />
+            android:title="@string/add_city" />
         <item
             android:id="@+id/item_manage_city"
             android:checked="false"
             android:icon="@drawable/ic_sync_white_18dp"
-            android:title="管理城市" />
+            android:title="@string/manage_city" />
         <!--<item-->
             <!--android:id="@+id/item_setting"-->
             <!--android:checked="false"-->
@@ -20,6 +20,6 @@
             android:id="@+id/item_about"
             android:checked="false"
             android:icon="@drawable/ic_more_horiz_white_18dp"
-            android:title="关于" />
+            android:title="@string/about" />
     </group>
 </menu>
