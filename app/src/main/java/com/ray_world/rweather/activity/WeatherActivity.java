@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -342,8 +341,7 @@ public class WeatherActivity extends AppCompatActivity {
         }
     }
 
-
-    public void queryWeatherInfo(String districtName, final String cityName) {
+    public void queryWeatherInfo(String districtName, String cityName) {
         Log.d("RayTest", "district = " + districtName + " city = " + cityName);
 
         //基础天气信息

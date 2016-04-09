@@ -29,6 +29,5 @@ dependencies {
     compile 'com.android.support:design:22.2.0'
     compile 'com.android.support:recyclerview-v7:21.0.0'
     compile 'com.daimajia.swipelayout:library:1.2.0@aar'
-    compile files('libs/volley.jar')
     compile files('libs/juhe_sdk_v_2_7.jar')
 }

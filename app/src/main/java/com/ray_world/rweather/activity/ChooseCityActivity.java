@@ -1,7 +1,10 @@
 package com.ray_world.rweather.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -23,8 +26,10 @@ import android.widget.Toast;
 import com.ray_world.rweather.R;
 import com.ray_world.rweather.model.City;
 import com.ray_world.rweather.util.MyApplication;
+import com.ray_world.rweather.util.Utility;
 import com.thinkland.sdk.android.DataCallBack;
 import com.thinkland.sdk.android.JuheData;
+import com.thinkland.sdk.android.Parameters;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,6 +54,10 @@ public class ChooseCityActivity extends AppCompatActivity {
 
     MyTextWatcher myTextWatcher;
     private Toolbar toolbar;
+
+    private String longitude; //经度
+    private String latitude; //纬度
+    private boolean located = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +84,11 @@ public class ChooseCityActivity extends AppCompatActivity {
         if (!isFromWeatherActivity) {
             toolbar.setNavigationIcon(null);
         }
+
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        final Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        longitude = String.valueOf(location.getLongitude());
+        latitude = String.valueOf(location.getLatitude());
 
         listView = (ListView) findViewById(R.id.list_view_city);
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dataList);
@@ -105,6 +119,40 @@ public class ChooseCityActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        Parameters parameters = new Parameters();
+        parameters.add("lon", longitude);
+        parameters.add("lat", latitude);
+        parameters.add("format", 2);
+        cityError.setText("定位中...");
+        cityError.setVisibility(View.VISIBLE);
+        JuheData.executeWithAPI(this, 39, "http://v.juhe.cn/weather/geo", JuheData.GET
+                , parameters, new DataCallBack() {
+                    @Override
+                    public void onSuccess(int i, String s) {
+                        Utility.handleLocationResponse(ChooseCityActivity.this, s);
+                        SharedPreferences prefs = PreferenceManager
+                                .getDefaultSharedPreferences(ChooseCityActivity.this);
+                        String districtName = prefs.getString("district", null);
+                        if (districtName != null) {
+                            cityError.setVisibility(View.GONE);
+                            located = true;
+                            queryCity(districtName);
+                        } else {
+                            cityError.setText("定位失败");
+                        }
+                    }
+
+                    @Override
+                    public void onFinish() {
+
+                    }
+
+                    @Override
+                    public void onFailure(int i, String s, Throwable throwable) {
+                        cityError.setText("定位失败");
+                    }
+                });
     }
 
     private class MyTextWatcher implements TextWatcher{
@@ -161,8 +209,14 @@ public class ChooseCityActivity extends AppCompatActivity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        dataList.add(city.getDistrict() + "   " + city.getCity()
-                                                + "   " + city.getProvince());
+                                        if (located == false) {
+                                            dataList.add(city.getDistrict() + "   " + city.getCity()
+                                                    + "   " + city.getProvince());
+                                        } else {
+                                            dataList.add(city.getDistrict() + "   " + city.getCity()
+                                                    + "   " + city.getProvince() + "   (本地)");
+                                            located = false;
+                                        }
                                     }
                                 });
                             }

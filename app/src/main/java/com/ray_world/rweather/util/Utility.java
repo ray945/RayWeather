@@ -18,27 +18,6 @@ import org.json.JSONObject;
  */
 public class Utility {
 
-    public synchronized static City handleCityResponse(String cityName
-            , String response) throws JSONException {
-        City mCity = new City();
-        if (!TextUtils.isEmpty(response)) {
-            JSONObject jsonObject = new JSONObject(response);
-            String resultCode = jsonObject.getString("resultcode");
-            JSONArray results = jsonObject.getJSONArray("result");
-            for (int i = 0; i < results.length(); i++) {
-                JSONObject cityObj = results.getJSONObject(i);
-                mCity.setId(cityObj.getInt("id"));
-                mCity.setProvince(cityObj.getString("province"));
-                mCity.setCity(cityObj.getString("city"));
-                mCity.setDistrict(cityObj.getString("district"));
-                if (cityName.equals(mCity.getCity())) {
-                    return mCity;
-                }
-            }
-        }
-        return null;
-    }
-
     public static void handlePMResponse(Context context, String response) {
         Log.i("test", "handlePMResponse");
         try {
@@ -321,6 +300,27 @@ public class Utility {
         editor.putString("preWeek4", preWeek4);
         editor.putString("preImage4", preImage4);
         editor.putString("preTemp4", preTemp4);
+        editor.commit();
+    }
+
+    public static void handleLocationResponse(Context context, String response) {
+        try {
+            JSONObject jsonObject = new JSONObject(response);
+            JSONObject result = jsonObject.getJSONObject("result");
+
+            JSONObject today = result.getJSONObject("today");
+            String districtName = today.getString("city");
+
+            saveLocationInfo(context, districtName);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void saveLocationInfo(Context context, String districtName) {
+        SharedPreferences.Editor editor = PreferenceManager
+                .getDefaultSharedPreferences(context).edit();
+        editor.putString("district", districtName);
         editor.commit();
     }
 }

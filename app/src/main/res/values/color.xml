@@ -2,14 +2,10 @@
 <resources>
     <color name="primary_color">#4CAF50</color>
     <color name="dark_primary_color">#388E3C</color>
-    <color name="accent_color">#FF9800</color>
     <color name="text_color">@color/primary_text_default_material_dark</color>
-    <color name="primary_text">#212121</color>
-    <color name="secend_text">#727272</color>
     <color name="card_color">#fff</color>
     <color name="card_text_color">#757575</color>
     <color name="sub_text_color">#9e9e9e</color>
-    <color name="delete_color">#FF5252</color>
     <color name="you">#14e715</color>
     <color name="liang">#ffff00</color>
     <color name="qingdu">#ff9800</color>
