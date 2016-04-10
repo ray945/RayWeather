@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -57,6 +58,9 @@ public class ChooseCityActivity extends AppCompatActivity {
 
     private String longitude; //经度
     private String latitude; //纬度
+    private LocationManager locationManager;
+    private Location location;
+    private MyLocationListener locationListener;
     private boolean located = false;
 
     @Override
@@ -85,10 +89,10 @@ public class ChooseCityActivity extends AppCompatActivity {
             toolbar.setNavigationIcon(null);
         }
 
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        final Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        longitude = String.valueOf(location.getLongitude());
-        latitude = String.valueOf(location.getLatitude());
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationListener = new MyLocationListener();
+        location = getBestLocation(locationManager);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 1, locationListener);
 
         listView = (ListView) findViewById(R.id.list_view_city);
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dataList);
@@ -120,39 +124,85 @@ public class ChooseCityActivity extends AppCompatActivity {
             }
         });
 
-        Parameters parameters = new Parameters();
-        parameters.add("lon", longitude);
-        parameters.add("lat", latitude);
-        parameters.add("format", 2);
-        cityError.setText("定位中...");
-        cityError.setVisibility(View.VISIBLE);
-        JuheData.executeWithAPI(this, 39, "http://v.juhe.cn/weather/geo", JuheData.GET
-                , parameters, new DataCallBack() {
-                    @Override
-                    public void onSuccess(int i, String s) {
-                        Utility.handleLocationResponse(ChooseCityActivity.this, s);
-                        SharedPreferences prefs = PreferenceManager
-                                .getDefaultSharedPreferences(ChooseCityActivity.this);
-                        String districtName = prefs.getString("district", null);
-                        if (districtName != null) {
-                            cityError.setVisibility(View.GONE);
-                            located = true;
-                            queryCity(districtName);
-                        } else {
+        Log.d("RayTest", "location = " + location);
+        if (location != null) {
+            longitude = String.valueOf(location.getLongitude());
+            latitude = String.valueOf(location.getLatitude());
+
+            Parameters parameters = new Parameters();
+            parameters.add("lon", longitude);
+            parameters.add("lat", latitude);
+            parameters.add("format", 2);
+            cityError.setText("定位中...");
+            cityError.setVisibility(View.VISIBLE);
+            JuheData.executeWithAPI(this, 39, "http://v.juhe.cn/weather/geo", JuheData.GET
+                    , parameters, new DataCallBack() {
+                        @Override
+                        public void onSuccess(int i, String s) {
+                            Utility.handleLocationResponse(ChooseCityActivity.this, s);
+                            SharedPreferences prefs = PreferenceManager
+                                    .getDefaultSharedPreferences(ChooseCityActivity.this);
+                            String districtName = prefs.getString("district", null);
+                            if (districtName != null) {
+                                located = true;
+                                queryCity(districtName);
+                            } else {
+                                cityError.setText("定位失败");
+                            }
+                        }
+
+                        @Override
+                        public void onFinish() {
+
+                        }
+
+                        @Override
+                        public void onFailure(int i, String s, Throwable throwable) {
                             cityError.setText("定位失败");
                         }
-                    }
+                    });
+        }
+    }
 
-                    @Override
-                    public void onFinish() {
+    private Location getBestLocation(LocationManager locationManager) {
+        Location result = null;
+        if (locationManager != null) {
+            result = locationManager
+                    .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (result != null) {
+                return result;
+            } else {
+                result = locationManager
+                        .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                return result;
+            }
+        }
+        return result;
+    }
 
-                    }
 
-                    @Override
-                    public void onFailure(int i, String s, Throwable throwable) {
-                        cityError.setText("定位失败");
-                    }
-                });
+    private class MyLocationListener implements LocationListener {
+
+        @Override
+        public void onLocationChanged(Location locationNew) {
+            location = locationNew;
+        }
+
+        @Override
+        public void onStatusChanged(String s, int i, Bundle bundle) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String s) {
+            locationManager.getLastKnownLocation(s);
+
+        }
+
+        @Override
+        public void onProviderDisabled(String s) {
+
+        }
     }
 
     private class MyTextWatcher implements TextWatcher{
@@ -201,7 +251,6 @@ public class ChooseCityActivity extends AppCompatActivity {
                             String result = cityObj.getString("district");
                             if (result.equals(cityName) || result.contains(cityName)) {
                                 cityError.setVisibility(View.GONE);
-                                Log.d("RayTest", "cityError gone");
                                 city.setId(cityObj.getInt("id"));
                                 city.setProvince(cityObj.getString("province"));
                                 city.setCity(cityObj.getString("city"));
@@ -216,6 +265,7 @@ public class ChooseCityActivity extends AppCompatActivity {
                                             dataList.add(city.getDistrict() + "   " + city.getCity()
                                                     + "   " + city.getProvince() + "   (本地)");
                                             located = false;
+                                            cityError.setVisibility(View.GONE);
                                         }
                                     }
                                 });
@@ -276,5 +326,17 @@ public class ChooseCityActivity extends AppCompatActivity {
         } else {
             finish();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 60000, 1, locationListener);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        locationManager.removeUpdates(locationListener);
     }
 }
