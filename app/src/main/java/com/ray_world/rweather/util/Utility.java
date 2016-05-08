@@ -41,8 +41,6 @@ public class Utility {
         editor.putString("aqi", aqi);
         editor.putString("pm", pm);
         editor.putString("quality", quality);
-        editor.putBoolean("city_selected", true);
-        Log.d("RayTest", "savePMResponse city = " + city);
         editor.commit();
     }
 

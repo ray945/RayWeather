@@ -45,7 +45,6 @@ public class WeatherActivity extends AppCompatActivity {
     private TextView cityName;
     private TextView tempText;
     private TextView weatherText;
-    private TextView preDayText1;
     private TextView preDayText2;
     private TextView preDayText3;
     private TextView preDayText4;
@@ -113,7 +112,6 @@ public class WeatherActivity extends AppCompatActivity {
         weatherText = (TextView) findViewById(R.id.weather_text);
         cityName = (TextView) findViewById(R.id.city_name_text);
         image = (ImageView) findViewById(R.id.img);
-        preDayText1 = (TextView) findViewById(R.id.pre_day1);
         preDayText2 = (TextView) findViewById(R.id.pre_day2);
         preDayText3 = (TextView) findViewById(R.id.pre_day3);
         preDayText4 = (TextView) findViewById(R.id.pre_day4);
@@ -355,23 +353,12 @@ public class WeatherActivity extends AppCompatActivity {
                 if (!TextUtils.isEmpty(response)) {
                     Utility.handleWeatherResponse(WeatherActivity.this, response);
                     isWeatherHandled = true;
-                    SharedPreferences prefs = PreferenceManager
-                            .getDefaultSharedPreferences(WeatherActivity.this);
-                    String districtName = prefs.getString("cityName", "");
-                    String cityName = prefs.getString("city", "");
-                    String cityTemp = prefs.getString("temp", "");
-                    Log.d("RayTest", "prefs cityName = " + cityName);
-                    SelectedCity selectedCity = new SelectedCity(districtName,cityName, cityTemp);
-                    if (!rWeatherDB.checkSelectedCity(selectedCity.getDistrictName())) {
-                        rWeatherDB.saveSelectedCity(selectedCity);
-                    } else {
-                        rWeatherDB.updateSelectedCity(selectedCity);
-                    }
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             if (isPMHandled && isTimeWeatherHandled) {
                                 showWeather();
+                                saveCity();
                             }
                         }
                     });
@@ -410,6 +397,7 @@ public class WeatherActivity extends AppCompatActivity {
                     public void run() {
                         if (isWeatherHandled && isTimeWeatherHandled) {
                             showWeather();
+                            saveCity();
                         }
                     }
                 });
@@ -447,6 +435,7 @@ public class WeatherActivity extends AppCompatActivity {
                     public void run() {
                         if (isWeatherHandled && isPMHandled) {
                             showWeather();
+                            saveCity();
                         }
                     }
                 });
@@ -470,6 +459,24 @@ public class WeatherActivity extends AppCompatActivity {
         });
     }
 
+    public void saveCity() {
+        SharedPreferences.Editor editor = PreferenceManager
+                .getDefaultSharedPreferences(WeatherActivity.this).edit();
+        editor.putBoolean("city_selected", true);
+        editor.commit();
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(WeatherActivity.this);
+        String districtName = prefs.getString("cityName", "");
+        String cityName = prefs.getString("city", "");
+        String cityTemp = prefs.getString("temp", "");
+        Log.d("RayTest", "prefs cityName = " + cityName);
+        SelectedCity selectedCity = new SelectedCity(districtName,cityName, cityTemp);
+        if (!rWeatherDB.checkSelectedCity(selectedCity.getDistrictName())) {
+            rWeatherDB.saveSelectedCity(selectedCity);
+        } else {
+            rWeatherDB.updateSelectedCity(selectedCity);
+        }
+    }
 
     private void showWeather() {
         Log.i("test", "showWeather");
@@ -510,7 +517,6 @@ public class WeatherActivity extends AppCompatActivity {
         setTemp(preWeatherMinText4, preWeatherMaxText4, "preTemp4");
         setImage(preImage4, "preImage4");
         Calendar c = Calendar.getInstance();
-        setWeek(preDayText1, "preWeek1");
         setWeek(preDayText2, "preWeek2");
         setWeek(preDayText3, "preWeek3");
         setWeek(preDayText4, "preWeek4");

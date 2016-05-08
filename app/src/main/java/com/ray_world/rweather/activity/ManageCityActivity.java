@@ -140,6 +140,7 @@ public class ManageCityActivity extends AppCompatActivity {
                 Map<String, String> list = new HashMap<>();
                 list.put("districtName", selectedCity.getDistrictName());
                 list.put("cityName", selectedCity.getCityName());
+                Log.d("RayTest", "query districtName = " + selectedCity.getDistrictName());
                 Log.d("RayTest", "query cityName = " + selectedCity.getCityName());
                 list.put("temp", selectedCity.getTemp());
                 lists.add(list);

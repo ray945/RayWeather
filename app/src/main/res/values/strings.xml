@@ -16,4 +16,6 @@
     <string name="live_purple_line">紫外线</string>
     <string name="live_wash_car">洗车</string>
     <string name="live_sports">运动</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>

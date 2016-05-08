@@ -197,7 +197,7 @@
                                     android:gravity="center"
                                     android:textColor="@color/primary_color"
                                     android:textSize="16sp"
-                                    android:text="周一"/>
+                                    android:text="明天"/>
 
                                 <ImageView
                                     android:id="@+id/pre_image1"
