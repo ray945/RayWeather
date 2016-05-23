@@ -28,6 +28,7 @@ import com.ray_world.rweather.model.SelectedCity;
 import com.ray_world.rweather.service.AutoRefreshService;
 import com.ray_world.rweather.util.MyApplication;
 import com.ray_world.rweather.util.Utility;
+import com.ray_world.rweather.widget.WhiteLineOneWidget;
 import com.thinkland.sdk.android.DataCallBack;
 import com.thinkland.sdk.android.JuheData;
 import com.thinkland.sdk.android.Parameters;
@@ -567,6 +568,11 @@ public class WeatherActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, AutoRefreshService.class);
         startService(intent);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean isAddWidget = preferences.getBoolean("isAddWidget", false);
+        if (isAddWidget) {
+            WhiteLineOneWidget.updateUI();
+        }
     }
 
     public void setWeek(TextView tv, String str) {

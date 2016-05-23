@@ -46,6 +46,10 @@ public class WhiteLineOneWidget extends AppWidgetProvider {
         mRemoteViews = new RemoteViews(context.getPackageName(), R.layout.white_line_one_widget);
         Intent intent = new Intent(context, UpdateWidgetService.class);
         context.startService(intent);
+        SharedPreferences.Editor editor = PreferenceManager
+                .getDefaultSharedPreferences(context).edit();
+        editor.putBoolean("isAddWidget", true);
+        editor.commit();
     }
 
     @Override
@@ -63,6 +67,10 @@ public class WhiteLineOneWidget extends AppWidgetProvider {
         super.onDeleted(context, appWidgetIds);
         Intent intent = new Intent(context, UpdateWidgetService.class);
         context.stopService(intent);
+        SharedPreferences.Editor editor = PreferenceManager
+                .getDefaultSharedPreferences(context).edit();
+        editor.putBoolean("isAddWidget", false);
+        editor.commit();
     }
 
     public static void updateUI() {
