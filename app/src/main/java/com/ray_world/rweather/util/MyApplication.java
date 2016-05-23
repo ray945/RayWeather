@@ -51,6 +51,5 @@ public class MyApplication extends Application {
                 activity.finish();
             }
         }
-        System.exit(0);
     }
 }

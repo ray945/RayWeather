@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.ray_world.rweather.R;
 import com.ray_world.rweather.model.RWeatherDB;
 import com.ray_world.rweather.model.SelectedCity;
+import com.ray_world.rweather.service.AutoRefreshService;
 import com.ray_world.rweather.util.MyApplication;
 import com.ray_world.rweather.util.Utility;
 import com.thinkland.sdk.android.DataCallBack;
@@ -563,6 +564,9 @@ public class WeatherActivity extends AppCompatActivity {
                 .getString("tempMax3", ""));
         setText(timeTempText4, prefs.getString("tempMin4", ""), prefs
                 .getString("tempMax4", ""));
+
+        Intent intent = new Intent(this, AutoRefreshService.class);
+        startService(intent);
     }
 
     public void setWeek(TextView tv, String str) {

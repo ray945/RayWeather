@@ -31,15 +31,41 @@
         </activity>
         <activity
             android:name=".activity.WeatherActivity"
-            android:label="@string/app_name"/>
+            android:label="@string/app_name" />
         <activity
             android:name=".activity.ManageCityActivity"
             android:label="管理城市"
-            android:theme="@style/ChooseAreaTheme"/>
+            android:theme="@style/ChooseAreaTheme" />
         <activity
             android:name=".activity.AboutActivity"
             android:label="关于"
-            android:theme="@style/ChooseAreaTheme"/>
+            android:theme="@style/ChooseAreaTheme" />
+
+        <receiver android:name=".widget.WhiteLineOneWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/white_line_one_widget_info" />
+        </receiver>
+
+        <service
+            android:name=".service.AutoRefreshService">
+            <intent-filter>
+                <action android:name="com.ray_world.rweather.service.AUTO_REFRESH_SERVICE" />
+            </intent-filter>
+        </service>
+
+        <receiver android:name=".service.AlarmReceiver" />
+
+        <service
+            android:name=".service.UpdateWidgetService">
+            <intent-filter>
+                <action android:name="com.ray_world.rweather.service.UPDATE_WIDGET_SERVICE" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
