@@ -44,8 +44,10 @@ public class UpdateWidgetService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.d("RayTest", "onStartCommand");
-        Intent i = new Intent("android.appwidget.action.REFRESH");
-        sendBroadcast(i);
+        Intent intentWhite = new Intent("android.appwidget.action.REFRESH");
+        sendOrderedBroadcast(intentWhite, null);
+        Intent intentTrans = new Intent("android.appwidget.action.REFRESH_TRANS");
+        sendOrderedBroadcast(intentTrans, null);
         flags = START_STICKY;
         return super.onStartCommand(intent, flags, startId);
     }
@@ -53,7 +55,10 @@ public class UpdateWidgetService extends Service {
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            WhiteLineOneWidget.updateUI();
+            Intent intentWhite = new Intent("android.appwidget.action.REFRESH");
+            sendOrderedBroadcast(intentWhite, null);
+            Intent intentTrans = new Intent("android.appwidget.action.REFRESH_TRANS");
+            sendOrderedBroadcast(intentTrans, null);
         }
     };
 

@@ -7,14 +7,12 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.ray_world.rweather.R;
 import com.ray_world.rweather.activity.WeatherActivity;
-import com.ray_world.rweather.service.AutoRefreshService;
 import com.ray_world.rweather.service.UpdateWidgetService;
 
 import java.text.SimpleDateFormat;
@@ -25,7 +23,7 @@ import java.util.Map;
 /**
  * Implementation of App Widget functionality.
  */
-public class WhiteLineOneWidget extends AppWidgetProvider {
+public class TransLineOneWidget extends AppWidgetProvider {
 
     private static SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
 
@@ -35,15 +33,10 @@ public class WhiteLineOneWidget extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        // There may be multiple widgets active, so update all of them
-        /*for (int appWidgetId : appWidgetIds) {
-            updateAppWidget(context, appWidgetManager, appWidgetId);
-        }*/
-
         Log.d("RayTest", "onUpdate");
         mContext = context;
         mAppWidgetManager = appWidgetManager;
-        mRemoteViews = new RemoteViews(context.getPackageName(), R.layout.white_line_one_widget);
+        mRemoteViews = new RemoteViews(context.getPackageName(), R.layout.trans_line_one_widget);
         Intent intent = new Intent(context, UpdateWidgetService.class);
         context.startService(intent);
         SharedPreferences.Editor editor = PreferenceManager
@@ -54,10 +47,10 @@ public class WhiteLineOneWidget extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (intent.getAction().equals("android.appwidget.action.REFRESH")) {
+        if (intent.getAction().equals("android.appwidget.action.REFRESH_TRANS")) {
             Log.d("RayTest", "onReceive CREATE_REMOTE_VIEW");
             if (mRemoteViews == null) {
-                mRemoteViews = new RemoteViews(context.getPackageName(), R.layout.white_line_one_widget);
+                mRemoteViews = new RemoteViews(context.getPackageName(), R.layout.trans_line_one_widget);
                 mContext = context;
                 mAppWidgetManager = AppWidgetManager.getInstance(context);
             }
@@ -82,26 +75,26 @@ public class WhiteLineOneWidget extends AppWidgetProvider {
     }
 
     public static void updateUI() {
-        Log.d("RayTest", "updateUI white");
+        Log.d("RayTest", "updateUI");
         String timeString = dateFormat.format(new Date());
-        mRemoteViews.setTextViewText(R.id.clock_desk, timeString);
+        mRemoteViews.setTextViewText(R.id.clock_desk_trans, timeString);
         SharedPreferences prefs = PreferenceManager
                 .getDefaultSharedPreferences(mContext);
-        setImage(R.id.weather_desk);
+        setImage(R.id.weather_desk_trans);
         String temp = prefs.getString("temp", "--")+ "℃";
         String tempText = prefs.getString("temperature", "");
         String[] array = tempText.split("~");
         String tempDay = array[0] + " ~ " +array[1];
         String pmText = prefs.getString("pm", "--");
         String pm = "pm2.5\n" + pmText;
-        mRemoteViews.setTextViewText(R.id.temp_desk, temp);
-        mRemoteViews.setTextViewText(R.id.temp_day_desk, tempDay);
-        mRemoteViews.setTextViewText(R.id.pm_desk, pm);
+        mRemoteViews.setTextViewText(R.id.temp_desk_trans, temp);
+        mRemoteViews.setTextViewText(R.id.temp_day_desk_trans, tempDay);
+        mRemoteViews.setTextViewText(R.id.pm_desk_trans, pm);
         Intent intent = new Intent(mContext, WeatherActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(mContext, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-        mRemoteViews.setOnClickPendingIntent(R.id.widget, pendingIntent);
+        mRemoteViews.setOnClickPendingIntent(R.id.widget_trans, pendingIntent);
         ComponentName componentName = new ComponentName(mContext,
-                WhiteLineOneWidget.class);
+                TransLineOneWidget.class);
         mAppWidgetManager.updateAppWidget(componentName, mRemoteViews);
     }
 

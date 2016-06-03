@@ -52,8 +52,7 @@
                 android:resource="@xml/white_line_one_widget_info" />
         </receiver>
 
-        <service
-            android:name=".service.AutoRefreshService">
+        <service android:name=".service.AutoRefreshService">
             <intent-filter>
                 <action android:name="com.ray_world.rweather.service.AUTO_REFRESH_SERVICE" />
             </intent-filter>
@@ -61,12 +60,22 @@
 
         <receiver android:name=".service.AlarmReceiver" />
 
-        <service
-            android:name=".service.UpdateWidgetService">
+        <service android:name=".service.UpdateWidgetService">
             <intent-filter>
                 <action android:name="com.ray_world.rweather.service.UPDATE_WIDGET_SERVICE" />
             </intent-filter>
         </service>
+
+        <receiver android:name=".widget.TransLineOneWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.appwidget.action.REFRESH_TRANS" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/trans_line_one_widget_info" />
+        </receiver>
     </application>
 
 </manifest>

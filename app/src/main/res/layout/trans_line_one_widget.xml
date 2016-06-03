@@ -1,0 +1,66 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_trans"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000"
+    android:orientation="horizontal"
+    android:elevation="1dp"
+    android:padding="@dimen/widget_margin">
+
+    <TextView
+        android:id="@+id/clock_desk_trans"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="50sp"
+        android:textColor="@color/text_color"
+        android:text="12:00"/>
+
+    <ImageView
+        android:id="@+id/weather_desk_trans"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/a01"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/temp_desk_trans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color"
+            android:textSize="20sp"
+            android:text="20℃"/>
+
+        <TextView
+            android:id="@+id/temp_day_desk_trans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/temp_desk_trans"
+            android:layout_marginTop="3dp"
+            android:textColor="@color/text_color"
+            android:textSize="14sp"
+            android:text="15℃ ~ 20℃"/>
+
+        <TextView
+            android:id="@+id/pm_desk_trans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/temp_desk_trans"
+            android:layout_alignBottom="@id/temp_desk_trans"
+            android:layout_marginLeft="8dp"
+            android:textColor="@color/text_color"
+            android:textSize="10sp"
+            android:text="pm2.5\n30"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -569,11 +569,10 @@ public class WeatherActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AutoRefreshService.class);
         startService(intent);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean isAddWidget = preferences.getBoolean("isAddWidget", false);
-        if (isAddWidget) {
-            Intent i = new Intent("android.appwidget.action.REFRESH");
-            sendBroadcast(i);
-        }
+        Intent intentWhite = new Intent("android.appwidget.action.REFRESH");
+        sendOrderedBroadcast(intentWhite, null);
+        Intent intentTrans = new Intent("android.appwidget.action.REFRESH_TRANS");
+        sendOrderedBroadcast(intentTrans, null);
     }
 
     public void setWeek(TextView tv, String str) {
