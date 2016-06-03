@@ -53,6 +53,20 @@ public class WhiteLineOneWidget extends AppWidgetProvider {
     }
 
     @Override
+    public void onReceive(Context context, Intent intent) {
+        if (intent.getAction().equals("android.appwidget.action.REFRESH")) {
+            Log.d("RayTest", "onReceive CREATE_REMOTE_VIEW");
+            if (mRemoteViews == null) {
+                mRemoteViews = new RemoteViews(context.getPackageName(), R.layout.white_line_one_widget);
+                mContext = context;
+                mAppWidgetManager = AppWidgetManager.getInstance(context);
+            }
+            updateUI();
+        }
+        super.onReceive(context, intent);
+    }
+
+    @Override
     public void onEnabled(Context context) {
         // Enter relevant functionality for when the first widget is created
     }
@@ -141,6 +155,14 @@ public class WhiteLineOneWidget extends AppWidgetProvider {
         imageMapping.put("29", R.drawable.a29);
         imageMapping.put("30", R.drawable.a30);
         imageMapping.put("31", R.drawable.a31);
+    }
+
+    public static boolean isRemoteViewNull() {
+        if (mRemoteViews == null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 

@@ -43,7 +43,9 @@ public class UpdateWidgetService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        WhiteLineOneWidget.updateUI();
+        Log.d("RayTest", "onStartCommand");
+        Intent i = new Intent("android.appwidget.action.REFRESH");
+        sendBroadcast(i);
         flags = START_STICKY;
         return super.onStartCommand(intent, flags, startId);
     }
@@ -57,7 +59,7 @@ public class UpdateWidgetService extends Service {
 
     @Override
     public void onDestroy() {
-        Log.d("RayTest", "onDestroy");
+        Log.d("RayTest", "UpdateWidgetService Destroy");
         super.onDestroy();
         unregisterReceiver(broadcastReceiver);
     }

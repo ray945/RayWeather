@@ -571,7 +571,8 @@ public class WeatherActivity extends AppCompatActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         boolean isAddWidget = preferences.getBoolean("isAddWidget", false);
         if (isAddWidget) {
-            WhiteLineOneWidget.updateUI();
+            Intent i = new Intent("android.appwidget.action.REFRESH");
+            sendBroadcast(i);
         }
     }
 
