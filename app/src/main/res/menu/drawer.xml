@@ -4,12 +4,12 @@
         <item
             android:id="@+id/item_add_city"
             android:checked="false"
-            android:icon="@drawable/ic_pin_drop_white_18dp"
+            android:icon="@drawable/ic_add_circle_outline_white_36dp"
             android:title="@string/add_city" />
         <item
             android:id="@+id/item_manage_city"
             android:checked="false"
-            android:icon="@drawable/ic_sync_white_18dp"
+            android:icon="@drawable/ic_location_city_white_36dp"
             android:title="@string/manage_city" />
         <item
             android:id="@+id/item_settings"
