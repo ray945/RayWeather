@@ -78,6 +78,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                         .inflate(R.layout.choose_color_layout, null);
                 AlertDialog builderColor = new AlertDialog.Builder(this)
                         .setView(layoutColor)
+                        .setTitle("选择主题色")
                         .create();
                 RadioGroup radioGroupColor = (RadioGroup) layoutColor.findViewById(R.id.choose_color);
                 RadioButton green = (RadioButton) layoutColor.findViewById(R.id.choose_color_green);
@@ -114,6 +115,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                         .inflate(R.layout.choose_rate_layout, null);
                 AlertDialog builder = new AlertDialog.Builder(this)
                         .setView(layout)
+                        .setTitle("选择刷新频率")
                         .create();
                 RadioGroup radioGroup = (RadioGroup) layout.findViewById(R.id.choose_rate);
                 RadioButton half = (RadioButton) layout.findViewById(R.id.choose_rate_half);
