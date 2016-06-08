@@ -51,8 +51,20 @@ public class AutoRefreshService extends Service {
         flags = START_STICKY;
         updateWeather();
         AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        int anHour = 60 * 60 * 1000;
-        long triggerAtTime = SystemClock.elapsedRealtime() + anHour;
+        int time = 60 * 60 * 1000;
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String currentRate = prefs.getString("refresh_rate", "1小时");
+        if (currentRate.equals("30分钟")) {
+            time = 30 * 60 * 1000;
+        } else if (currentRate.equals("1小时")) {
+            time = 60 * 60 * 1000;
+        } else if (currentRate.equals("2小时")) {
+            time = 2 * 60 * 60 * 1000;
+        } else if (currentRate.equals("3小时")) {
+            time = 3 * 60 * 60 * 1000;
+        }
+        Log.d("RayTest", "time = " + time);
+        long triggerAtTime = SystemClock.elapsedRealtime() + time;
         Intent i = new Intent(this, AlarmReceiver.class);
         PendingIntent pi = PendingIntent.getBroadcast(this, 0, i, 0);
         manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, pi);

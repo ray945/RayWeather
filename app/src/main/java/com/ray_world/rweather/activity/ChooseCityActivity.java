@@ -65,6 +65,17 @@ public class ChooseCityActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String currentColor = preferences.getString("current_color", "青春绿");
+        if (currentColor.equals("青春绿")) {
+            setTheme(R.style.ColorGreenTheme);
+        } else if (currentColor.equals("天空蓝")) {
+            setTheme(R.style.ColorBlueTheme);
+        } else if (currentColor.equals("活力黄")) {
+            setTheme(R.style.ColorYellowTheme);
+        } else if (currentColor.equals("碧波翠")) {
+            setTheme(R.style.ColorGreenDarkTheme);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_city);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);

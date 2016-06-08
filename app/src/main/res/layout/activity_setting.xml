@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorTheme"
+        android:minHeight="?attr/actionBarSize"
+        app:navigationIcon="@drawable/ic_arrow_back_white_18dp"
+        app:titleTextAppearance="@style/textStyle"
+        app:title="@string/settings"/>
+
+    <LinearLayout
+        android:id="@+id/setting_primary_color"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_marginTop="8dp"
+        android:padding="16dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/primary_text_default_material_light"
+            android:text="@string/primary_color"/>
+        <TextView
+            android:id="@+id/color_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/secondary_text_default_material_light"
+            android:text="#123"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/setting_refresh_rate"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:padding="16dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/primary_text_default_material_light"
+            android:text="@string/refresh_rate"/>
+        <TextView
+            android:id="@+id/refresh_rate_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/secondary_text_default_material_light"
+            android:text="一小时"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/setting_about"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:padding="16dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/primary_text_default_material_light"
+            android:text="@string/about"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -17,7 +17,7 @@
             android:id="@+id/tool_bar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="?attr/colorTheme"
             app:titleTextAppearance="@style/textStyle"
             android:theme="@style/AppTheme.AppBarOverlay"
             app:title="@string/app_name"/>
@@ -30,7 +30,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:background="@color/primary_color">
+                android:background="?attr/colorTheme">
 
             </FrameLayout>
 
@@ -73,7 +73,7 @@
                                     android:layout_marginTop="30dp"
                                     android:layout_marginLeft="30dp"
                                     android:paddingLeft="10dp"
-                                    android:textColor="@color/primary_color"
+                                    android:textColor="?attr/colorTheme"
                                     android:textSize="30sp"
                                     android:text="城市"/>
 
@@ -195,7 +195,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
-                                    android:textColor="@color/primary_color"
+                                    android:textColor="?attr/colorTheme"
                                     android:textSize="16sp"
                                     android:text="明天"/>
 
@@ -241,7 +241,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
-                                    android:textColor="@color/primary_color"
+                                    android:textColor="?attr/colorTheme"
                                     android:textSize="16sp"
                                     android:text="周二"/>
 
@@ -287,7 +287,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
-                                    android:textColor="@color/primary_color"
+                                    android:textColor="?attr/colorTheme"
                                     android:textSize="16sp"
                                     android:text="周三"/>
 
@@ -334,7 +334,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
-                                    android:textColor="@color/primary_color"
+                                    android:textColor="?attr/colorTheme"
                                     android:textSize="16sp"
                                     android:text="周四"/>
 
@@ -385,7 +385,7 @@
                                 android:layout_marginTop="20dp"
                                 android:layout_marginLeft="30dp"
                                 android:textSize="18sp"
-                                android:textColor="@color/primary_color"
+                                android:textColor="?attr/colorTheme"
                                 android:text="城市3小时天气"/>
 
                             <LinearLayout
@@ -615,7 +615,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="30dp"
-                                    android:textColor="@color/primary_color"
+                                    android:textColor="?attr/colorTheme"
                                     android:textSize="18sp"
                                     android:text="@string/air_quality"/>
 
@@ -683,7 +683,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="15dp"
                                 android:layout_marginLeft="30dp"
-                                android:textColor="@color/primary_color"
+                                android:textColor="?attr/colorTheme"
                                 android:textSize="18sp"
                                 android:text="@string/live_cloths"/>
 
@@ -715,7 +715,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="30dp"
-                                        android:textColor="@color/primary_color"
+                                        android:textColor="?attr/colorTheme"
                                         android:textSize="18sp"
                                         android:text="@string/live_purple_line"/>
 
@@ -740,7 +740,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="30dp"
-                                        android:textColor="@color/primary_color"
+                                        android:textColor="?attr/colorTheme"
                                         android:textSize="18sp"
                                         android:text="@string/live_wash_car"/>
 
@@ -751,7 +751,7 @@
                                         android:layout_marginTop="3dp"
                                         android:layout_marginLeft="30dp"
                                         android:layout_marginBottom="10dp"
-                                        android:textColor="@color/card_text_color"
+                                        android:textColor="?attr/colorTheme"
                                         android:textSize="15sp"/>
                                 </LinearLayout>
 
@@ -765,7 +765,7 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="30dp"
-                                        android:textColor="@color/primary_color"
+                                        android:textColor="?attr/colorTheme"
                                         android:textSize="18sp"
                                         android:text="@string/live_sports"/>
 

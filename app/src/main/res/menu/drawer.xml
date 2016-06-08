@@ -11,15 +11,10 @@
             android:checked="false"
             android:icon="@drawable/ic_sync_white_18dp"
             android:title="@string/manage_city" />
-        <!--<item-->
-            <!--android:id="@+id/item_setting"-->
-            <!--android:checked="false"-->
-            <!--android:icon="@drawable/ic_settings_white_18dp"-->
-            <!--android:title="设置" />-->
         <item
-            android:id="@+id/item_about"
+            android:id="@+id/item_settings"
             android:checked="false"
-            android:icon="@drawable/ic_more_horiz_white_18dp"
-            android:title="@string/about" />
+            android:icon="@drawable/ic_settings_white_36dp"
+            android:title="@string/settings" />
     </group>
 </menu>

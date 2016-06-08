@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:id="@+id/choose_color"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        >
+
+        <RadioButton
+            android:id="@+id/choose_color_green"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="10dp"
+            android:background="@drawable/green"
+            android:textColor="@color/card_color"
+            android:textSize="16sp"
+            android:text="青春绿"
+            android:button="@drawable/radiobutton_bg"/>
+
+        <RadioButton
+            android:id="@+id/choose_color_blue"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="10dp"
+            android:background="@drawable/blue"
+            android:textColor="@color/card_color"
+            android:textSize="16sp"
+            android:text="天空蓝"
+            android:button="@drawable/radiobutton_bg"/>
+
+        <RadioButton
+            android:id="@+id/choose_color_yellow"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="10dp"
+            android:background="@drawable/yellow"
+            android:textColor="@color/card_color"
+            android:textSize="16sp"
+            android:text="活力黄"
+            android:button="@drawable/radiobutton_bg"/>
+
+        <RadioButton
+            android:id="@+id/choose_color_green_dark"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginBottom="10dp"
+            android:paddingLeft="10dp"
+            android:textColor="@color/card_color"
+            android:textSize="16sp"
+            android:text="碧波翠"
+            android:background="@drawable/green_dark"
+            android:button="@drawable/radiobutton_bg"/>
+    </RadioGroup>
+
+</LinearLayout>

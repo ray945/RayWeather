@@ -28,7 +28,6 @@ import com.ray_world.rweather.model.SelectedCity;
 import com.ray_world.rweather.service.AutoRefreshService;
 import com.ray_world.rweather.util.MyApplication;
 import com.ray_world.rweather.util.Utility;
-import com.ray_world.rweather.widget.WhiteLineOneWidget;
 import com.thinkland.sdk.android.DataCallBack;
 import com.thinkland.sdk.android.JuheData;
 import com.thinkland.sdk.android.Parameters;
@@ -103,8 +102,19 @@ public class WeatherActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String currentColor = preferences.getString("current_color", "青春绿");
+        if (currentColor.equals("青春绿")) {
+            setTheme(R.style.ColorGreen);
+        } else if (currentColor.equals("天空蓝")) {
+            setTheme(R.style.ColorBlue);
+        } else if (currentColor.equals("活力黄")) {
+            setTheme(R.style.ColorYellow);
+        } else if (currentColor.equals("碧波翠")) {
+            setTheme(R.style.ColorGreenDark);
+        }
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.new_weather_layout);
+        setContentView(R.layout.activity_weather);
         MyApplication.getInstance().addActivity(this);
         initToolbar();
 
@@ -188,8 +198,8 @@ public class WeatherActivity extends AppCompatActivity {
                     Intent intent = new Intent(WeatherActivity.this, ManageCityActivity.class);
                     intent.putExtra("currentCity", cityName.getText().toString());
                     startActivity(intent);
-                } else if (menuItem.getItemId() == R.id.item_about) {
-                    Intent intent = new Intent(WeatherActivity.this, AboutActivity.class);
+                } else if (menuItem.getItemId() == R.id.item_settings) {
+                    Intent intent = new Intent(WeatherActivity.this, SettingActivity.class);
                     startActivity(intent);
                 }
                 return true;
@@ -568,7 +578,6 @@ public class WeatherActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, AutoRefreshService.class);
         startService(intent);
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         Intent intentWhite = new Intent("android.appwidget.action.REFRESH");
         sendOrderedBroadcast(intentWhite, null);
         Intent intentTrans = new Intent("android.appwidget.action.REFRESH_TRANS");

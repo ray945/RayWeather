@@ -18,4 +18,7 @@
     <string name="live_sports">运动</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
+    <string name="settings">设置</string>
+    <string name="primary_color">主题色</string>
+    <string name="refresh_rate">刷新频率</string>
 </resources>
