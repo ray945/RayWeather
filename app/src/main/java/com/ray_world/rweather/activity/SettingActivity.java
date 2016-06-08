@@ -2,6 +2,7 @@ package com.ray_world.rweather.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
@@ -23,6 +24,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private LinearLayout primaryColorSetting;
     private LinearLayout refreshRateSetting;
     private LinearLayout aboutSetting;
+    private LinearLayout feedbackSetting;
     private TextView refreshRateText;
     private TextView colorText;
 
@@ -46,9 +48,11 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         primaryColorSetting = (LinearLayout) findViewById(R.id.setting_primary_color);
         refreshRateSetting = (LinearLayout) findViewById(R.id.setting_refresh_rate);
         aboutSetting = (LinearLayout) findViewById(R.id.setting_about);
+        feedbackSetting = (LinearLayout) findViewById(R.id.setting_feedback);
         primaryColorSetting.setOnClickListener(this);
         refreshRateSetting.setOnClickListener(this);
         aboutSetting.setOnClickListener(this);
+        feedbackSetting.setOnClickListener(this);
         refreshRateText = (TextView) findViewById(R.id.refresh_rate_text);
         colorText = (TextView) findViewById(R.id.color_text);
         updateRate();
@@ -145,6 +149,12 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.setting_about:
                 Intent intent = new Intent(this, AboutActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.setting_feedback:
+                Intent intentMail = new Intent(Intent.ACTION_SENDTO);
+                intentMail.setData(Uri.parse("mailto:zhaorui007@qq.com"));
+                intentMail.putExtra(Intent.EXTRA_SUBJECT, "Ray天气意见反馈");
+                startActivity(intentMail);
                 break;
         }
     }

@@ -21,4 +21,6 @@
     <string name="settings">设置</string>
     <string name="primary_color">主题色</string>
     <string name="refresh_rate">刷新频率</string>
+    <string name="feedback">意见反馈</string>
+    <string name="share">分享</string>
 </resources>

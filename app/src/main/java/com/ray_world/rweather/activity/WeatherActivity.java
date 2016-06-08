@@ -3,7 +3,11 @@ package com.ray_world.rweather.activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -32,7 +36,13 @@ import com.thinkland.sdk.android.DataCallBack;
 import com.thinkland.sdk.android.JuheData;
 import com.thinkland.sdk.android.Parameters;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -201,6 +211,16 @@ public class WeatherActivity extends AppCompatActivity {
                 } else if (menuItem.getItemId() == R.id.item_settings) {
                     Intent intent = new Intent(WeatherActivity.this, SettingActivity.class);
                     startActivity(intent);
+                } else if (menuItem.getItemId() == R.id.item_share) {
+                    drawPic();
+                    String imagePath = "/sdcard/com.ray_world.rweather/share.png";
+                    //由文件得到uri
+                    Uri imageUri = Uri.fromFile(new File(imagePath));
+                    Intent shareIntent = new Intent();
+                    shareIntent.setAction(Intent.ACTION_SEND);
+                    shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+                    shareIntent.setType("image/*");
+                    startActivity(Intent.createChooser(shareIntent, "分享到"));
                 }
                 return true;
             }
@@ -673,6 +693,45 @@ public class WeatherActivity extends AppCompatActivity {
             mDrawerLayout.closeDrawer(Gravity.LEFT);
         } else {
             MyApplication.getInstance().exit();
+        }
+    }
+
+    public void drawPic() {
+        View view = findViewById(R.id.weather_card);
+        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),
+                Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        view.draw(canvas);
+
+        File temp = new File("/sdcard/com.ray_world.rweather/" + "temp");
+        if (!temp.exists()) {
+            try {
+                //按照指定的路径创建文件夹
+                temp.mkdirs();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        File file = new File("/sdcard/com.ray_world.rweather/" + "share.png");
+        if(file.exists()){
+            file.delete();
+        }
+        FileOutputStream out;
+        try{
+            out = new FileOutputStream(file);
+            if(bitmap.compress(Bitmap.CompressFormat.PNG, 90, out))
+            {
+                out.flush();
+                out.close();
+            }
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
         }
     }
 }
